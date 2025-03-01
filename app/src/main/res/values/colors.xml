@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FAF7F7</color>
+    <color name="colorPrimaryDark">#FAF7F7</color>
+    <color name="colorAccent">#D84040</color>
+    <color name="colorAccent80">#CCD84040</color>
+    <color name="colorAccent50">#80D84040</color>
+    <color name="colorAccent64">#A3D84040</color>
+    <color name="colorAccent34">#57D84040</color>
+    <color name="colorAccent12">#1FD84040</color>
+    <color name="colorAccent8">#14D84040</color>
+    <color name="colorBackground">#FAF7F7</color>
+    <color name="colorSecondaryBackground">#EDEDED</color>
+
+    <color name="colorCardBackground">#EFEFEF</color>
+    <color name="colorCardBackground50">#80FDFAFA</color>
+    <color name="colorCardBackground34">#57FDFAFA</color>
+
+    <color name="colorIcon">#212121</color>
+    <color name="colorIconOpacity">#757575</color>
+    <color name="colorText">#212121</color>
+    <color name="colorTextOpacity">#757575</color>
+    <color name="colorTextOpacity24">#3D212121</color>
+
+    <color name="colorWhite50">#80FFFFFF</color>
+    <color name="colorRed">#ea2e3c</color>
+    <color name="colorGreen">#008041</color>
+
+    <color name="colorAccentAd">#2962FF</color>
+    <color name="colorTextAd">#181818</color>
+    <color name="colorSubTextAd">#828282</color>
+    <color name="colorPrimaryAd">#F0F0F0</color>
+    <color name="colorTextDivider">#EBEBEB</color>
+
+</resources>

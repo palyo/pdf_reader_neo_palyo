@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">Berechtigung erforderlich</string>
+    <string name="body_sheet_storage_permission">Um Dateien auf Ihrem Gerät zu lesen und zu bearbeiten, erlauben Sie bitte den Zugriff auf alle Ihre Dateien.</string>
+    <string name="label_allow_access_to_all_files">Zugriff auf alle Dateien erlauben</string>
+    <string name="button_allow">Erlauben</string>
+    <string name="title_home">Startseite</string>
+    <string name="title_recent">Zuletzt</string>
+    <string name="title_favorite">Favoriten</string>
+
+    <string name="empty_title_no_files">Keine Dateien!</string>
+    <string name="empty_body_no_files">Es wurden keine Dateien gefunden.</string>
+    <string name="tab_all">ALLE</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">Okay</string>
+    <string name="label_loading">Laden...</string>
+    <string name="title_share">Teilen</string>
+    <string name="menu_share">Teilen</string>
+    <string name="menu_delete">Löschen</string>
+    <string name="menu_rename">Umbenennen</string>
+    <string name="menu_add_favorite">Zu Favoriten hinzufügen</string>
+    <string name="menu_remove_favorite">Aus Favoriten entfernen</string>
+
+    <string name="message_please_wait">Dies kann eine Weile dauern, bitte warten Sie, bis es abgeschlossen ist.</string>
+    <string name="sheet_title_delete_permanently">❌ Dauerhaft löschen?</string>
+    <string name="sheet_body_delete_permanently">Möchten Sie diese Datei wirklich dauerhaft löschen? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="button_cancel">Abbrechen</string>
+    <string name="sheet_title_deleting">Löschen… %1$d%%</string>
+
+    <string name="button_rename">Umbenennen</string>
+    <string name="sheet_title_rename">Datei umbenennen</string>
+    <string name="title_edit">Bearbeiten</string>
+    <string name="menu_app_language">App-Sprache</string>
+    <string name="sheet_title_save_changes">Änderungen speichern?</string>
+    <string name="sheet_body_save_changes">Ihre nicht gespeicherten Änderungen gehen verloren. Möchten Sie die Änderungen vor dem Schließen speichern?</string>
+    <string name="hint_file_name">Dateiname</string>
+    <string name="menu_save">Speichern</string>
+    <string name="button_discard">Verwerfen</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="menu_share_app">App teilen</string>
+    <string name="menu_privacy_policy">Datenschutzrichtlinie</string>
+    <string name="label_other">Sonstiges</string>
+    <string name="menu_caller_id">Über Anrufer-ID</string>
+    <string name="menu_manage_consent">Zustimmung verwalten</string>
+    <string name="sheet_title_default_app">Der schnellste Weg, Ihre Dateien zu lesen</string>
+    <string name="sheet_body_default_app">Legen Sie „PDF Reader - PDF Viewer“ als Standard-Dokumentenanzeige fest.</string>
+    <string name="button_set_as_default">Als Standard festlegen</string>
+
+    <string name="button_submit_review">Feedback senden</string>
+    <string name="title_review_sheet">Gefällt Ihnen unsere App?</string>
+    <string name="body_review_sheet">Wir schätzen Ihr Feedback! Wenn Ihnen die App gefällt, nehmen Sie sich bitte einen Moment Zeit, um uns zu bewerten. Ihre Bewertungen helfen uns, die App zu verbessern und eine bessere Erfahrung zu bieten.</string>
+    <string name="title_print">Drucken</string>
+    <string name="title_copy">Inhalt kopieren</string>
+    <string name="title_full_screen">Vollbild</string>
+    <string name="title_night">Nachtmodus</string>
+    <string name="title_light">Lichtmodus</string>
+    <string name="ic_intro_title_1">All-in-One PDF-Reader</string>
+    <string name="ic_intro_title_2">PDF schnell bearbeiten</string>
+    <string name="ic_intro_title_3">Einfache Dateiverwaltung</string>
+    <string name="ic_intro_body_1">Verwalten Sie alle Ihre Dokumentdateien.</string>
+    <string name="ic_intro_body_2">Markieren, unterstreichen, durchstreichen und mehr.</string>
+    <string name="ic_intro_body_3">Organisieren und verwalten Sie alle Dokumentdateien an einem Ort.</string>
+    <string name="message_contain_ad">Diese Aktion kann Werbung enthalten</string>
+
+</resources>

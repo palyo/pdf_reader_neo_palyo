@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">Toestemming Vereis</string>
+    <string name="body_sheet_storage_permission">Om lêers op jou toestel te lees en te redigeer, staan asseblief toegang tot al jou lêers toe.</string>
+    <string name="label_allow_access_to_all_files">Laat toegang toe om al lêers te bestuur</string>
+    <string name="button_allow">Laat toe</string>
+    <string name="title_home">Tuis</string>
+    <string name="title_recent">Onlangse</string>
+    <string name="title_favorite">Gunsteling</string>
+
+    <string name="empty_title_no_files">Geen lêers nie!</string>
+    <string name="empty_body_no_files">Geen lêers gevind nie.</string>
+    <string name="tab_all">ALLES</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">OK</string>
+    <string name="label_loading">Laai...</string>
+    <string name="title_share">Deel</string>
+    <string name="menu_share">Deel</string>
+    <string name="menu_delete">Verwyder</string>
+    <string name="menu_rename">Hernoem</string>
+    <string name="menu_add_favorite">Voeg by gunstelinge</string>
+    <string name="menu_remove_favorite">Verwyder uit gunstelinge</string>
+
+    <string name="message_please_wait">Dit sal \'n rukkie neem, wag asseblief totdat dit klaar is.</string>
+    <string name="sheet_title_delete_permanently">❌ Permanent Verwyder?</string>
+    <string name="sheet_body_delete_permanently">Is jy seker dat jy hierdie lêer permanent wil verwyder? Hierdie aksie kan nie ongedaan gemaak word nie.</string>
+    <string name="button_cancel">Kanselleer</string>
+    <string name="sheet_title_deleting">Besig om te verwyder… %1$d%%</string>
+
+    <string name="button_rename">Hernoem</string>
+    <string name="sheet_title_rename">Hernoem lêer</string>
+    <string name="title_edit">Wysig</string>
+    <string name="menu_app_language">App-taal</string>
+    <string name="sheet_title_save_changes">Stoor veranderinge?</string>
+    <string name="sheet_body_save_changes">Jou ongestoorde veranderinge sal verlore gaan. Stoor veranderinge voordat jy sluit?</string>
+    <string name="hint_file_name">Lêernaam</string>
+    <string name="menu_save">Stoor</string>
+    <string name="button_discard">Verwerp</string>
+    <string name="title_settings">Instellings</string>
+    <string name="menu_share_app">Deel App</string>
+    <string name="menu_privacy_policy">Privaatheidsbeleid</string>
+    <string name="label_other">Ander</string>
+    <string name="menu_caller_id">Oor Oproepidentifikasie</string>
+    <string name="menu_manage_consent">Bestuur Toestemming</string>
+    <string name="sheet_title_default_app">Die vinnigste manier om jou lêers te lees</string>
+    <string name="sheet_body_default_app">Stel "Pdf Reader - Pdf Viewer" in as jou verstek dokumentleerder.</string>
+    <string name="button_set_as_default">Stel in as verstek</string>
+
+    <string name="button_submit_review">Stuur Terugvoer</string>
+    <string name="title_review_sheet">Hou jy van ons App?</string>
+    <string name="body_review_sheet">Ons waardeer jou terugvoer! As jy graag die app gebruik, neem asseblief \'n oomblik om ons te beoordeel. Jou resensies help ons om te verbeter en \'n beter ervaring te skep.</string>
+    <string name="title_print">Druk</string>
+    <string name="title_copy">Kopieer inhoud</string>
+    <string name="title_full_screen">Volskerm</string>
+    <string name="title_night">Nagmodus</string>
+    <string name="title_light">Ligmodus</string>
+    <string name="ic_intro_title_1">Alles-in-een PDF-lezer</string>
+    <string name="ic_intro_title_2">Geur jou PDF vinnig</string>
+    <string name="ic_intro_title_3">Maklike lêerbestuur</string>
+    <string name="ic_intro_body_1">Bestuur al jou dokumentlêers.</string>
+    <string name="ic_intro_body_2">Voer hoërlig, onderstreep, deurstryk en meer uit.</string>
+    <string name="ic_intro_body_3">Organiseer en bestuur al jou dokumentlêers op een plek.</string>
+    <string name="message_contain_ad">Hierdie aksie kan \'n advertensie bevat</string>
+
+</resources>

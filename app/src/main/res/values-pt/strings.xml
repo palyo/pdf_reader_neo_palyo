@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">Permissão Necessária</string>
+    <string name="body_sheet_storage_permission">Para ler e editar arquivos no seu dispositivo, permita o acesso a todos os arquivos.</string>
+    <string name="label_allow_access_to_all_files">Permitir acesso para gerenciar todos os arquivos</string>
+    <string name="button_allow">Permitir</string>
+    <string name="title_home">Início</string>
+    <string name="title_recent">Recentes</string>
+    <string name="title_favorite">Favoritos</string>
+
+    <string name="empty_title_no_files">Nenhum arquivo!</string>
+    <string name="empty_body_no_files">Nenhum arquivo foi encontrado.</string>
+    <string name="tab_all">TODOS</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">Ok</string>
+    <string name="label_loading">Carregando...</string>
+    <string name="title_share">Compartilhar</string>
+    <string name="menu_share">Compartilhar</string>
+    <string name="menu_delete">Excluir</string>
+    <string name="menu_rename">Renomear</string>
+    <string name="menu_add_favorite">Adicionar aos favoritos</string>
+    <string name="menu_remove_favorite">Remover dos favoritos</string>
+
+    <string name="message_please_wait">Isso pode levar algum tempo, aguarde até que termine.</string>
+    <string name="sheet_title_delete_permanently">❌ Excluir Permanentemente?</string>
+    <string name="sheet_body_delete_permanently">Tem certeza de que deseja excluir permanentemente este arquivo? Esta ação não pode ser desfeita.</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="sheet_title_deleting">Excluindo… %1$d%%</string>
+
+    <string name="button_rename">Renomear</string>
+    <string name="sheet_title_rename">Renomear arquivo</string>
+    <string name="title_edit">Editar</string>
+    <string name="menu_app_language">Idioma do aplicativo</string>
+    <string name="sheet_title_save_changes">Salvar alterações?</string>
+    <string name="sheet_body_save_changes">Suas alterações não salvas serão perdidas. Deseja salvar antes de fechar?</string>
+    <string name="hint_file_name">Nome do arquivo</string>
+    <string name="menu_save">Salvar</string>
+    <string name="button_discard">Descartar</string>
+    <string name="title_settings">Configurações</string>
+    <string name="menu_share_app">Compartilhar App</string>
+    <string name="menu_privacy_policy">Política de Privacidade</string>
+    <string name="label_other">Outros</string>
+    <string name="menu_caller_id">Sobre o Identificador de Chamadas</string>
+    <string name="menu_manage_consent">Gerenciar Consentimento</string>
+    <string name="sheet_title_default_app">A maneira mais rápida de ler seus arquivos</string>
+    <string name="sheet_body_default_app">Defina "Leitor de PDF - Visualizador de PDF" como seu visualizador de documentos padrão.</string>
+    <string name="button_set_as_default">Definir como padrão</string>
+
+    <string name="button_submit_review">Enviar Feedback</string>
+    <string name="title_review_sheet">Está gostando do nosso app?</string>
+    <string name="body_review_sheet">Valorizamos seu feedback! Se você gosta do aplicativo, tire um momento para nos avaliar. Suas avaliações nos ajudam a melhorar e oferecer uma experiência ainda melhor.</string>
+    <string name="title_print">Imprimir</string>
+    <string name="title_copy">Copiar conteúdo</string>
+    <string name="title_full_screen">Tela cheia</string>
+    <string name="title_night">Modo noturno</string>
+    <string name="title_light">Modo claro</string>
+    <string name="ic_intro_title_1">Leitor de PDF Tudo-em-Um</string>
+    <string name="ic_intro_title_2">Edite rapidamente seu PDF</string>
+    <string name="ic_intro_title_3">Gerenciamento fácil de arquivos</string>
+    <string name="ic_intro_body_1">Gerencie todos os seus arquivos de documentos.</string>
+    <string name="ic_intro_body_2">Destaque, sublinhe, risque e muito mais.</string>
+    <string name="ic_intro_body_3">Organize e gerencie todos os arquivos de documentos em um só lugar.</string>
+    <string name="message_contain_ad">Esta ação pode conter anúncios</string>
+
+</resources>

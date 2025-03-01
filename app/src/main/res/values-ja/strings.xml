@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">許可が必要です</string>
+    <string name="body_sheet_storage_permission">デバイス上のファイルを読み取りおよび編集するには、すべてのファイルへのアクセスを許可してください。</string>
+    <string name="label_allow_access_to_all_files">すべてのファイルを管理するアクセスを許可</string>
+    <string name="button_allow">許可</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_recent">最近</string>
+    <string name="title_favorite">お気に入り</string>
+
+    <string name="empty_title_no_files">ファイルがありません！</string>
+    <string name="empty_body_no_files">ファイルが見つかりません。</string>
+    <string name="tab_all">すべて</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">OK</string>
+    <string name="label_loading">読み込み中..</string>
+    <string name="title_share">共有</string>
+    <string name="menu_share">共有</string>
+    <string name="menu_delete">削除</string>
+    <string name="menu_rename">名前変更</string>
+    <string name="menu_add_favorite">お気に入りに追加</string>
+    <string name="menu_remove_favorite">お気に入りから削除</string>
+
+    <string name="message_please_wait">少し時間がかかりますので、完了するまでお待ちください。</string>
+    <string name="sheet_title_delete_permanently">❌ 完全に削除しますか？</string>
+    <string name="sheet_body_delete_permanently">このファイルを完全に削除してもよろしいですか？この操作は元に戻せません。</string>
+    <string name="button_cancel">キャンセル</string>
+    <string name="sheet_title_deleting">削除中… %1$d%%</string>
+
+    <string name="button_rename">名前変更</string>
+    <string name="sheet_title_rename">ファイル名を変更</string>
+    <string name="title_edit">編集</string>
+    <string name="menu_app_language">アプリの言語</string>
+    <string name="sheet_title_save_changes">変更を保存しますか？</string>
+    <string name="sheet_body_save_changes">保存されていない変更は失われます。閉じる前に変更を保存しますか？</string>
+    <string name="hint_file_name">ファイル名</string>
+    <string name="menu_save">保存</string>
+    <string name="button_discard">破棄</string>
+    <string name="title_settings">設定</string>
+    <string name="menu_share_app">アプリを共有</string>
+    <string name="menu_privacy_policy">プライバシーポリシー</string>
+    <string name="label_other">その他</string>
+    <string name="menu_caller_id">発信者IDについて</string>
+    <string name="menu_manage_consent">同意の管理</string>
+    <string name="sheet_title_default_app">ファイルを最速で閲覧</string>
+    <string name="sheet_body_default_app">「PDFリーダー - PDFビューア」をデフォルトのドキュメントビューアとして設定します。</string>
+    <string name="button_set_as_default">デフォルトに設定</string>
+
+    <string name="button_submit_review">フィードバックを送信</string>
+    <string name="title_review_sheet">アプリを気に入っていますか？</string>
+    <string name="body_review_sheet">ご意見をお聞かせください！アプリを楽しんでいただけたら、評価をお願いします。あなたのレビューがアプリの改善に役立ちます。</string>
+    <string name="title_print">印刷</string>
+    <string name="title_copy">内容をコピー</string>
+    <string name="title_full_screen">フルスクリーン</string>
+    <string name="title_night">ナイトモード</string>
+    <string name="title_light">ライトモード</string>
+    <string name="ic_intro_title_1">オールインワンPDFリーダー</string>
+    <string name="ic_intro_title_2">PDFをすばやく編集</string>
+    <string name="ic_intro_title_3">簡単なファイル管理</string>
+    <string name="ic_intro_body_1">すべてのドキュメントファイルを管理</string>
+    <string name="ic_intro_body_2">ハイライト、下線、取り消し線などを適用</string>
+    <string name="ic_intro_body_3">すべてのドキュメントファイルを1か所で整理・管理</string>
+    <string name="message_contain_ad">この操作には広告が含まれる場合があります</string>
+
+</resources>

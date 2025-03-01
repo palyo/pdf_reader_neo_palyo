@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activities.HomeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top_bar"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            android:theme="@style/Theme.Space.AppBarOverlay"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@null"
+                android:theme="@style/Theme.PdfReaderNeo"
+                app:contentInsetStartWithNavigation="@dimen/_0sdp"
+                app:popupTheme="@style/Theme.Space.PopupMenu"
+                app:title="@string/app_name_title"
+                app:titleTextAppearance="@style/TextAppearance.Space.TitleSmall"
+                app:titleTextColor="@color/colorText">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_settings"
+                    style="@style/MaterialButtonTransparent"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:icon="@drawable/ic_menu_settings"
+                    app:iconPadding="@dimen/_0sdp"
+                    app:iconSize="@dimen/_20sdp" />
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        android:id="@+id/container_fragment"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_0sdp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@id/view_separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar" />
+
+    <View
+        android:id="@+id/view_separator"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="1dp"
+        android:background="@color/colorTextOpacity24"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorPrimary"
+        app:itemActiveIndicatorStyle="@style/Theme.PdfReaderNeo.Indicator"
+        app:itemIconSize="@dimen/_18sdp"
+        app:itemIconTint="@color/ic_nav_item_tint"
+        app:itemPaddingBottom="@dimen/_8sdp"
+        app:itemPaddingTop="@dimen/_8sdp"
+        app:itemRippleColor="@color/colorAccent8"
+        app:itemTextAppearanceActive="@style/Theme.PdfReaderNeo.BottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/Theme.PdfReaderNeo.BottomNavigationView.InActive"
+        app:itemTextColor="@color/ic_nav_item_tint"
+        app:labelVisibilityMode="auto"
+        app:layout_constraintBottom_toTopOf="@+id/view_separator2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
+
+    <View
+        android:id="@+id/view_separator2"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="2dp"
+        android:background="@color/colorCardBackground"
+        app:layout_constraintBottom_toTopOf="@+id/ad_banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+        android:id="@+id/ad_banner"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/native_65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

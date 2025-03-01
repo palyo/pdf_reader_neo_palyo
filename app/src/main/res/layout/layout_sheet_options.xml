@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_bg_rounded_sheet"
+    android:paddingBottom="@dimen/_12sdp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/drag_handle"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:alpha="0.25"
+        app:cardBackgroundColor="@color/colorIconOpacity"
+        app:cardElevation="@dimen/_0sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="@dimen/_0sdp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_favorite"
+        style="@style/MaterialButtonTransparent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:text="@string/menu_add_favorite"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_8sdp"
+        app:icon="@drawable/ic_navigation_favorite_normal"
+        app:iconPadding="@dimen/_11sdp"
+        app:iconSize="@dimen/_14sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drag_handle"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_rename"
+        style="@style/MaterialButtonTransparent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:text="@string/menu_rename"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_8sdp"
+        app:icon="@drawable/ic_menu_rename"
+        app:iconPadding="@dimen/_11sdp"
+        app:iconSize="@dimen/_14sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_favorite"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_share"
+        style="@style/MaterialButtonTransparent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:text="@string/menu_share"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_8sdp"
+        app:icon="@drawable/ic_menu_share"
+        app:iconPadding="@dimen/_10sdp"
+        app:iconSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_rename" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_delete_permanently"
+        style="@style/MaterialButtonTransparent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:text="@string/menu_delete"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_8sdp"
+        app:icon="@drawable/ic_menu_delete"
+        app:iconPadding="@dimen/_10sdp"
+        app:iconSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

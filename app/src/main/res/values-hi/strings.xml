@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">अनुमति आवश्यक</string>
+    <string name="body_sheet_storage_permission">आपके डिवाइस पर फ़ाइलें पढ़ने और संपादित करने के लिए, कृपया सभी फ़ाइलों तक पहुंच की अनुमति दें।</string>
+    <string name="label_allow_access_to_all_files">सभी फ़ाइलों को प्रबंधित करने की अनुमति दें</string>
+    <string name="button_allow">अनुमति दें</string>
+    <string name="title_home">होम</string>
+    <string name="title_recent">हाल ही में</string>
+    <string name="title_favorite">पसंदीदा</string>
+
+    <string name="empty_title_no_files">कोई फ़ाइल नहीं!</string>
+    <string name="empty_body_no_files">कोई फ़ाइल नहीं मिली।</string>
+    <string name="tab_all">सभी</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">ठीक है</string>
+    <string name="label_loading">लोड हो रहा है...</string>
+    <string name="title_share">साझा करें</string>
+    <string name="menu_share">साझा करें</string>
+    <string name="menu_delete">हटाएं</string>
+    <string name="menu_rename">नाम बदलें</string>
+    <string name="menu_add_favorite">पसंदीदा में जोड़ें</string>
+    <string name="menu_remove_favorite">पसंदीदा से हटाएं</string>
+
+    <string name="message_please_wait">इसे पूरा होने में कुछ समय लगेगा, कृपया प्रतीक्षा करें।</string>
+    <string name="sheet_title_delete_permanently">❌ स्थायी रूप से हटाएं?</string>
+    <string name="sheet_body_delete_permanently">क्या आप वाकई इस फ़ाइल को स्थायी रूप से हटाना चाहते हैं? इस क्रिया को पूर्ववत नहीं किया जा सकता।</string>
+    <string name="button_cancel">रद्द करें</string>
+    <string name="sheet_title_deleting">हटाया जा रहा है... %1$d%%</string>
+
+    <string name="button_rename">नाम बदलें</string>
+    <string name="sheet_title_rename">फ़ाइल का नाम बदलें</string>
+    <string name="title_edit">संपादित करें</string>
+    <string name="menu_app_language">ऐप भाषा</string>
+    <string name="sheet_title_save_changes">परिवर्तनों को सहेजें?</string>
+    <string name="sheet_body_save_changes">आपके असहेजित परिवर्तन खो जाएंगे। बंद करने से पहले परिवर्तन सहेजें?</string>
+    <string name="hint_file_name">फ़ाइल का नाम</string>
+    <string name="menu_save">सहेजें</string>
+    <string name="button_discard">खारिज करें</string>
+    <string name="title_settings">सेटिंग्स</string>
+    <string name="menu_share_app">ऐप साझा करें</string>
+    <string name="menu_privacy_policy">गोपनीयता नीति</string>
+    <string name="label_other">अन्य</string>
+    <string name="menu_caller_id">कॉलर आईडी के बारे में</string>
+    <string name="menu_manage_consent">सहमति प्रबंधित करें</string>
+    <string name="sheet_title_default_app">आपकी फ़ाइलें पढ़ने का सबसे तेज़ तरीका</string>
+    <string name="sheet_body_default_app">"PDF Reader - PDF Viewer" को अपना डिफ़ॉल्ट दस्तावेज़ व्यूअर बनाएं।</string>
+    <string name="button_set_as_default">डिफ़ॉल्ट के रूप में सेट करें</string>
+
+    <string name="button_submit_review">प्रतिक्रिया भेजें</string>
+    <string name="title_review_sheet">क्या आपको हमारा ऐप पसंद है?</string>
+    <string name="body_review_sheet">हम आपकी प्रतिक्रिया को महत्व देते हैं! यदि आपको यह ऐप पसंद आया हो, तो कृपया हमें रेटिंग दें। आपकी समीक्षाएं हमें अनुभव को बेहतर बनाने में मदद करती हैं।</string>
+    <string name="title_print">प्रिंट करें</string>
+    <string name="title_copy">सामग्री कॉपी करें</string>
+    <string name="title_full_screen">फुल स्क्रीन</string>
+    <string name="title_night">नाइट मोड</string>
+    <string name="title_light">लाइट मोड</string>
+    <string name="ic_intro_title_1">ऑल-इन-वन PDF रीडर</string>
+    <string name="ic_intro_title_2">तेज़ी से अपने PDF संपादित करें</string>
+    <string name="ic_intro_title_3">आसान फ़ाइल प्रबंधन</string>
+    <string name="ic_intro_body_1">अपने सभी दस्तावेज़ फ़ाइलों को प्रबंधित करें।</string>
+    <string name="ic_intro_body_2">हाइलाइट, अंडरलाइन, स्ट्राइकथ्रू और बहुत कुछ करें।</string>
+    <string name="ic_intro_body_3">सभी दस्तावेज़ फ़ाइलों को एक ही स्थान पर व्यवस्थित और प्रबंधित करें।</string>
+    <string name="message_contain_ad">इस क्रिया में विज्ञापन हो सकता है</string>
+
+</resources>

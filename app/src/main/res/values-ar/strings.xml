@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">مطلوب إذن</string>
+    <string name="body_sheet_storage_permission">للقراءة والتعديل على الملفات في جهازك، يرجى السماح بالوصول إلى جميع ملفاتك.</string>
+    <string name="label_allow_access_to_all_files">السماح بالوصول لإدارة جميع الملفات</string>
+    <string name="button_allow">السماح</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_recent">الأخيرة</string>
+    <string name="title_favorite">المفضلة</string>
+
+    <string name="empty_title_no_files">لا توجد ملفات!</string>
+    <string name="empty_body_no_files">لم يتم العثور على أي ملفات.</string>
+    <string name="tab_all">الكل</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">حسنًا</string>
+    <string name="label_loading">جارٍ التحميل...</string>
+    <string name="title_share">مشاركة</string>
+    <string name="menu_share">مشاركة</string>
+    <string name="menu_delete">حذف</string>
+    <string name="menu_rename">إعادة التسمية</string>
+    <string name="menu_add_favorite">إضافة إلى المفضلة</string>
+    <string name="menu_remove_favorite">إزالة من المفضلة</string>
+
+    <string name="message_please_wait">قد يستغرق هذا بعض الوقت، يرجى الانتظار حتى يكتمل.</string>
+    <string name="sheet_title_delete_permanently">❌ حذف نهائي؟</string>
+    <string name="sheet_body_delete_permanently">هل أنت متأكد أنك تريد حذف هذا الملف نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="button_cancel">إلغاء</string>
+    <string name="sheet_title_deleting">جارٍ الحذف… %1$d%%</string>
+
+    <string name="button_rename">إعادة التسمية</string>
+    <string name="sheet_title_rename">إعادة تسمية الملف</string>
+    <string name="title_edit">تعديل</string>
+    <string name="menu_app_language">لغة التطبيق</string>
+    <string name="sheet_title_save_changes">حفظ التغييرات؟</string>
+    <string name="sheet_body_save_changes">سيتم فقدان التغييرات غير المحفوظة. هل تريد حفظ التغييرات قبل الإغلاق؟</string>
+    <string name="hint_file_name">اسم الملف</string>
+    <string name="menu_save">حفظ</string>
+    <string name="button_discard">تجاهل</string>
+    <string name="title_settings">الإعدادات</string>
+    <string name="menu_share_app">مشاركة التطبيق</string>
+    <string name="menu_privacy_policy">سياسة الخصوصية</string>
+    <string name="label_other">أخرى</string>
+    <string name="menu_caller_id">حول معرف المتصل</string>
+    <string name="menu_manage_consent">إدارة الموافقة</string>
+    <string name="sheet_title_default_app">أسرع طريقة لقراءة ملفاتك</string>
+    <string name="sheet_body_default_app">قم بتعيين "قارئ PDF - عارض PDF" كتطبيق افتراضي لعرض المستندات.</string>
+    <string name="button_set_as_default">تعيين كافتراضي</string>
+
+    <string name="button_submit_review">إرسال الملاحظات</string>
+    <string name="title_review_sheet">هل تحب تطبيقنا؟</string>
+    <string name="body_review_sheet">نحن نقدر ملاحظاتك! إذا كنت تستمتع باستخدام التطبيق، يرجى أخذ لحظة لتقييمنا. تساعدنا تقييماتك على التحسين وتقديم تجربة أفضل.</string>
+    <string name="title_print">طباعة</string>
+    <string name="title_copy">نسخ المحتوى</string>
+    <string name="title_full_screen">شاشة كاملة</string>
+    <string name="title_night">الوضع الليلي</string>
+    <string name="title_light">الوضع الفاتح</string>
+    <string name="ic_intro_title_1">قارئ PDF شامل</string>
+    <string name="ic_intro_title_2">تحرير سريع لملفات PDF</string>
+    <string name="ic_intro_title_3">إدارة الملفات بسهولة</string>
+    <string name="ic_intro_body_1">إدارة جميع مستنداتك بسهولة.</string>
+    <string name="ic_intro_body_2">قم بتمييز النص، التسطير، الشطب والمزيد.</string>
+    <string name="ic_intro_body_3">تنظيم وإدارة جميع ملفات المستندات في مكان واحد.</string>
+    <string name="message_contain_ad">قد تحتوي هذه العملية على إعلان</string>
+
+</resources>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activities.viewer.EditPdfActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top_bar"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorTransparent"
+            android:theme="@style/Theme.Space.AppBarOverlay"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@null"
+                android:theme="@style/Theme.Space"
+                app:navigationIcon="@drawable/ic_icon_arrow_back"
+                app:popupTheme="@style/Theme.Space.PopupMenu"
+                app:titleTextAppearance="@style/TextAppearance.Space.TitleSmall"
+                app:titleTextColor="@color/colorText">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_0sdp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_controller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar" />
+
+    <RelativeLayout
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_0sdp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_controller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar">
+
+        <com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.drawing.DrawingOverlayView
+            android:id="@+id/drawingView"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_0sdp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorSize="@dimen/_24sdp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_controller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar"
+        app:trackThickness="@dimen/_2sdp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_controller"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorCardBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_highlight"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Highlight"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_highlighter_line"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".25" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_underline"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Underline"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_underline"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/action_highlight"
+            app:layout_constraintStart_toEndOf="@+id/action_highlight"
+            app:layout_constraintTop_toTopOf="@+id/action_highlight"
+            app:layout_constraintWidth_percent=".25" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_strikethrough"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Strikethrough"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_strikethrough"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/action_highlight"
+            app:layout_constraintStart_toEndOf="@+id/action_underline"
+            app:layout_constraintTop_toTopOf="@+id/action_highlight"
+            app:layout_constraintWidth_percent=".25" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_signature"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Sign"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_signature"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/action_highlight"
+            app:layout_constraintStart_toEndOf="@+id/action_strikethrough"
+            app:layout_constraintTop_toTopOf="@+id/action_highlight"
+            app:layout_constraintWidth_percent=".25" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sign_controller"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorCardBackground"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_cancel"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Cancel"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_cancel"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".25" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_done"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_8sdp"
+            android:singleLine="true"
+            android:text="Apply"
+            android:textSize="@dimen/_8ssp"
+            app:icon="@drawable/ic_action_edit_apply"
+            app:iconGravity="textTop"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/action_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/action_cancel"
+            app:layout_constraintWidth_percent=".25" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

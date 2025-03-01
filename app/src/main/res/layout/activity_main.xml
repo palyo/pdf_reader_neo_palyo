@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activities.MainActivity">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/icon_app"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_0sdp"
+        android:layout_marginHorizontal="@dimen/_78sdp"
+        android:background="#0DE5252A"
+        app:contentPadding="@dimen/_36sdp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_details"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        app:srcCompat="@drawable/ic_app_icon" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_details"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="@dimen/_24sdp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/app_welcome"
+            style="@style/TextMedium"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_48sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:gravity="center_vertical"
+            android:text="Welcome to"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/app_name"
+            app:layout_constraintEnd_toEndOf="@+id/app_name"
+            app:layout_constraintStart_toStartOf="@id/app_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/app_name"
+            style="@style/TextExtraBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:text="Pdf Reader &amp; Pdf Viewer"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintBottom_toTopOf="@+id/app_slogan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/app_slogan"
+            style="@style/TextRegular"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_24sdp"
+            android:alpha="0.75"
+            android:text="Effortlessly open, read, and manage your PDFs anytime, anywhere."
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/progress_text"
+            app:layout_constraintEnd_toEndOf="@+id/app_name"
+            app:layout_constraintStart_toStartOf="@+id/app_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/progress_text"
+            style="@style/TextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="@string/message_contain_ad"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintBottom_toTopOf="@+id/progress_bar"
+            app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+            app:layout_constraintStart_toStartOf="@+id/progress_bar" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_80sdp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorAccent"
+            android:visibility="visible"
+            app:indicatorColor="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:trackColor="@color/colorAccent12" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

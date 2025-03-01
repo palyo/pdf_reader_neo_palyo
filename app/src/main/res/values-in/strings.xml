@@ -1,0 +1,67 @@
+<resources>
+    <string name="title_sheet_permission">Izin Diperlukan</string>
+    <string name="body_sheet_storage_permission">Untuk membaca dan mengedit file di perangkat Anda, harap izinkan akses ke semua file.</string>
+    <string name="label_allow_access_to_all_files">Izinkan akses untuk mengelola semua file</string>
+    <string name="button_allow">Izinkan</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_recent">Terbaru</string>
+    <string name="title_favorite">Favorit</string>
+
+    <string name="empty_title_no_files">Tidak ada file!</string>
+    <string name="empty_body_no_files">Tidak ada file yang ditemukan.</string>
+    <string name="tab_all">SEMUA</string>
+    <string name="tab_pdf">PDF</string>
+    <string name="tab_doc">DOC</string>
+    <string name="tab_ppt">PPT</string>
+    <string name="tab_xls">XLS</string>
+    <string name="button_ok">Oke</string>
+    <string name="label_loading">Memuat..</string>
+    <string name="title_share">Bagikan</string>
+    <string name="menu_share">Bagikan</string>
+    <string name="menu_delete">Hapus</string>
+    <string name="menu_rename">Ubah nama</string>
+    <string name="menu_add_favorite">Tambahkan ke favorit</string>
+    <string name="menu_remove_favorite">Hapus dari favorit</string>
+
+    <string name="message_please_wait">Ini akan memakan waktu, harap tunggu hingga selesai.</string>
+    <string name="sheet_title_delete_permanently">❌ Hapus Secara Permanen?</string>
+    <string name="sheet_body_delete_permanently">Apakah Anda yakin ingin menghapus file ini secara permanen? Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="button_cancel">Batal</string>
+    <string name="sheet_title_deleting">Menghapus… %1$d%%</string>
+
+    <string name="button_rename">Ubah Nama</string>
+    <string name="sheet_title_rename">Ubah nama file</string>
+    <string name="title_edit">Edit</string>
+    <string name="menu_app_language">Bahasa aplikasi</string>
+    <string name="sheet_title_save_changes">Simpan perubahan?</string>
+    <string name="sheet_body_save_changes">Perubahan yang belum disimpan akan hilang. Simpan perubahan sebelum menutup?</string>
+    <string name="hint_file_name">Nama file</string>
+    <string name="menu_save">Simpan</string>
+    <string name="button_discard">Buang</string>
+    <string name="title_settings">Pengaturan</string>
+    <string name="menu_share_app">Bagikan Aplikasi</string>
+    <string name="menu_privacy_policy">Kebijakan Privasi</string>
+    <string name="label_other">Lainnya</string>
+    <string name="menu_caller_id">Tentang ID Pemanggil</string>
+    <string name="menu_manage_consent">Kelola Persetujuan</string>
+    <string name="sheet_title_default_app">Cara tercepat untuk membaca file Anda</string>
+    <string name="sheet_body_default_app">Tetapkan "PDF Reader - PDF Viewer" sebagai penampil dokumen default Anda.</string>
+    <string name="button_set_as_default">Tetapkan sebagai default</string>
+
+    <string name="button_submit_review">Kirim Umpan Balik</string>
+    <string name="title_review_sheet">Suka Aplikasi Kami?</string>
+    <string name="body_review_sheet">Kami menghargai umpan balik Anda! Jika Anda menikmati aplikasi ini, luangkan waktu untuk memberi peringkat. Ulasan Anda membantu kami meningkatkan pengalaman pengguna.</string>
+    <string name="title_print">Cetak</string>
+    <string name="title_copy">Salin konten</string>
+    <string name="title_full_screen">Layar penuh</string>
+    <string name="title_night">Mode malam</string>
+    <string name="title_light">Mode terang</string>
+    <string name="ic_intro_title_1">Pembaca PDF Serba Bisa</string>
+    <string name="ic_intro_title_2">Edit PDF dengan cepat</string>
+    <string name="ic_intro_title_3">Manajemen file yang mudah</string>
+    <string name="ic_intro_body_1">Kelola semua file dokumen Anda.</string>
+    <string name="ic_intro_body_2">Lakukan sorotan, garis bawah, coretan, dan lainnya.</string>
+    <string name="ic_intro_body_3">Atur dan kelola semua file dokumen di satu tempat.</string>
+    <string name="message_contain_ad">Tindakan ini mungkin berisi iklan</string>
+
+</resources>
