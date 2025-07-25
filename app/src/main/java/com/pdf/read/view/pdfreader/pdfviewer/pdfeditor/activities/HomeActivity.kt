@@ -6,10 +6,13 @@ import android.net.*
 import android.os.*
 import android.widget.*
 import androidx.activity.*
+import androidx.core.content.*
 import androidx.fragment.app.Fragment
 import coder.apps.space.library.base.*
+import coder.apps.space.library.extension.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.App.Companion.isOpenInter
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.R
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext.*
@@ -17,6 +20,7 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.fragments.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.viewmodel.*
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
+
     private var documentViewModel: DocumentViewModel? = null
     override fun ActivityHomeBinding.initExtra() {
         setupNavigation()
@@ -33,17 +37,30 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
+                    buttonSort.beVisible()
+                    buttonSearch.beVisible()
                     updateFragment(HomeFragment.newInstance(), HomeFragment::class.java.name)
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.navigation_recent -> {
+                    buttonSort.beGone()
+                    buttonSearch.beVisible()
                     updateFragment(RecentFragment.newInstance(), RecentFragment::class.java.name)
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.navigation_favorite -> {
+                    buttonSort.beGone()
+                    buttonSearch.beVisible()
                     updateFragment(FavoriteFragment.newInstance(), FavoriteFragment::class.java.name)
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.navigation_tool -> {
+                    buttonSort.beGone()
+                    buttonSearch.beGone()
+                    updateFragment(ToolFragment.newInstance(), ToolFragment::class.java.name)
                     return@setOnItemSelectedListener true
                 }
             }
@@ -53,17 +70,29 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     private fun ActivityHomeBinding.openDefaultNavigation() {
         when (intent?.getIntExtra(CURRENT_TAB, 0)) {
+            3 -> {
+                buttonSort.beGone()
+                buttonSearch.beGone()
+                bottomNavigationView.selectedItemId = R.id.navigation_tool
+                updateFragment(ToolFragment.newInstance(), ToolFragment::class.java.name)
+            }
             2 -> {
+                buttonSort.beGone()
+                buttonSearch.beVisible()
                 bottomNavigationView.selectedItemId = R.id.navigation_favorite
                 updateFragment(FavoriteFragment.newInstance(), FavoriteFragment::class.java.name)
             }
 
             1 -> {
+                buttonSort.beGone()
+                buttonSearch.beVisible()
                 bottomNavigationView.selectedItemId = R.id.navigation_recent
                 updateFragment(RecentFragment.newInstance(), RecentFragment::class.java.name)
             }
 
             else -> {
+                buttonSort.beVisible()
+                buttonSearch.beVisible()
                 bottomNavigationView.selectedItemId = R.id.navigation_home
                 updateFragment(HomeFragment.newInstance(), HomeFragment::class.java.name)
             }
@@ -99,6 +128,25 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             SettingsDialogFragment.newInstance().apply {
                 isCancelable = true
                 show(supportFragmentManager.beginTransaction(), SettingsDialogFragment::class.java.simpleName)
+            }
+        }
+        buttonSearch.setOnClickListener {
+            FindFiles.newInstance { file ->
+                val uri: Uri = FileProvider.getUriForFile(this@HomeActivity, "${packageName}.provider", file)
+                if (file.isPdf) {
+                    go(
+                        PDFReaderActivity::class.java,
+                        listOf(FILE_URI to uri, FILE_PATH to file.path, FILE_NAME to file.name)
+                    )
+                } else {
+                    go(
+                        ReaderActivity::class.java,
+                        listOf(FILE_URI to uri, FILE_PATH to file.path, FILE_NAME to file.name)
+                    )
+                }
+            }.apply {
+                isCancelable = true
+                show(supportFragmentManager.beginTransaction(), FindFiles::class.java.simpleName)
             }
         }
     }

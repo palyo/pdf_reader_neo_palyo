@@ -1,11 +1,8 @@
 package com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext
 
-import android.app.Activity
-import android.content.*
 import android.os.*
-import android.print.*
+import coder.apps.space.library.extension.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
-import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.adapter.*
 import kotlinx.coroutines.*
 import java.io.*
 
@@ -27,8 +24,30 @@ val defaultStorageLocation: String
         return s
     }
 
-fun printPdfUsingPrintManager(context: Activity, pdfFile: File) {
+fun createOrExistsFile(file: File?): Boolean {
+    if (file == null) return false
+    if (file.exists()) return file.isFile
+    return if (!createOrExistsDir(file.parentFile)) false else try {
+        file.createNewFile()
+    } catch (e: IOException) {
+        false
+    }
+}
 
+fun deleteDirectory(directory: File) {
+    if (directory.isDirectory) {
+        val files = directory.listFiles()
+        if (files != null) {
+            for (file in files) {
+                if (file.isDirectory) {
+                    deleteDirectory(file)
+                } else {
+                    file.delete()
+                }
+            }
+        }
+    }
+    directory.delete()
 }
 
 fun createOrExistsDir(file: File?): Boolean {
@@ -37,7 +56,7 @@ fun createOrExistsDir(file: File?): Boolean {
 
 suspend fun MutableList<File>.deleteFilesWithProgress(
     progress: ((progress: Int) -> Unit)? = null,
-    complete: () -> Unit
+    complete: () -> Unit,
 ) {
     val totalFiles = size
     var deletedFiles = 0

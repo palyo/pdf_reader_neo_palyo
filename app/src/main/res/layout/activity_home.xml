@@ -48,6 +48,28 @@
                     app:icon="@drawable/ic_menu_settings"
                     app:iconPadding="@dimen/_0sdp"
                     app:iconSize="@dimen/_20sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_search"
+                    style="@style/MaterialButtonTransparent"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:icon="@drawable/ic_menu_search"
+                    app:iconPadding="@dimen/_0sdp"
+                    app:iconSize="@dimen/_18sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_sort"
+                    style="@style/MaterialButtonTransparent"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:icon="@drawable/ic_menu_filter"
+                    app:iconPadding="@dimen/_0sdp"
+                    app:iconSize="@dimen/_18sdp" />
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,8 +101,6 @@
         app:itemActiveIndicatorStyle="@style/Theme.PdfReaderNeo.Indicator"
         app:itemIconSize="@dimen/_18sdp"
         app:itemIconTint="@color/ic_nav_item_tint"
-        app:itemPaddingBottom="@dimen/_8sdp"
-        app:itemPaddingTop="@dimen/_8sdp"
         app:itemRippleColor="@color/colorAccent8"
         app:itemTextAppearanceActive="@style/Theme.PdfReaderNeo.BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/Theme.PdfReaderNeo.BottomNavigationView.InActive"
@@ -100,11 +120,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+    <coder.apps.space.library.widgets.AdsView
         android:id="@+id/ad_banner"
         android:layout_width="@dimen/_0sdp"
         android:layout_height="@dimen/native_65dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:shimmer_preview_layout="@layout/ad_unified_banner_loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

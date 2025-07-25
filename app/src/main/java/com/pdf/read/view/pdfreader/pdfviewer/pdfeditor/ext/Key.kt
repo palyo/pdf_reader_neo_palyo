@@ -15,6 +15,16 @@ const val FILE_URI = "fileUri"
 const val FILE_NAME = "fileName"
 const val FILE_PATH = "filePath"
 
+const val SORT_BY = "sort_by"
+const val SORT_ORDER = "sort_order"
+
+const val SORT_MODIFIED = "sort_modified"
+const val SORT_NAME = "sort_name"
+const val SORT_SIZE = "sort_size"
+
+const val SORT_ASCENDING = "sort_ascending"
+const val SORT_DESCENDING = "sort_descending"
+
 const val APPLICATION_TYPE_WP: Byte = 0
 const val APPLICATION_TYPE_SS: Byte = 1
 const val APPLICATION_TYPE_PPT: Byte = 2
@@ -39,6 +49,30 @@ const val FILE_TYPE_POT = "pot"
 const val FILE_TYPE_PPTM = "pptm"
 const val FILE_TYPE_POTX = "potx"
 const val FILE_TYPE_POTM = "potm"
+
+const val SELECTED_FILE = "selected_file"
+const val WORD_PICK = "word_file"
+const val PPT_PICK = "slider_file"
+const val EXCEL_PICK = "excel_file"
+const val TEXT_PICK = "text_file"
+const val PDF_PICK = "pdf_file"
+
+
+const val MERGE = "merge"
+const val SPLIT = "split"
+const val COMPRESS = "compress"
+const val EDIT = "edit"
+const val TEXT_TO_PDF = "text_to_pdf"
+const val IMAGE_TO_PDF = "image_to_pdf"
+const val WORD_TO_PDF = "word_to_pdf"
+const val EXCEL_TO_PDF = "excel_to_pdf"
+const val EXTRACT_PAGE = "extract_page"
+const val REMOVE_PAGE = "remove_page"
+
+const val NO_ERROR = 0
+const val ERROR_PAGE_NUMBER = 1
+const val ERROR_PAGE_RANGE = 2
+const val ERROR_INVALID_INPUT = 3
 
 const val GAP = 5
 const val ZOOM_ROUND = 10000000

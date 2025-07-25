@@ -9,7 +9,7 @@ import androidx.core.app.*
 
 val STORAGE_PERMISSION = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 else arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-
+val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
 fun Activity.hasPermissions(permissions: Array<String>): Boolean = permissions.all { ActivityCompat.checkSelfPermission(applicationContext, it) == PackageManager.PERMISSION_GRANTED }
 
 fun Activity.hasOverlayPermission(): Boolean {

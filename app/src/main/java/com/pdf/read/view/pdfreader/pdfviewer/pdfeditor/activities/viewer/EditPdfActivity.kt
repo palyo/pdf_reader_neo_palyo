@@ -8,12 +8,15 @@ import android.widget.*
 import androidx.activity.*
 import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.R
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.model.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.viewmodel.*
+import com.tom_roush.pdfbox.pdmodel.*
+import com.tom_roush.pdfbox.pdmodel.interactive.annotation.*
 import kotlinx.coroutines.*
 import java.io.*
 
@@ -41,9 +44,54 @@ class EditPdfActivity : BaseActivity<ActivityEditPdfBinding>(ActivityEditPdfBind
             pdfView
                 .fromFile(file)
                 .defaultPage(0)
-                .pageSnap(pageSnap = true)
-                .autoSpacing(autoSpacing = true)
-                .enableDoubleTap(enableDoubleTap = true)
+                .enableAnnotationRendering(true)
+                .autoSpacing(true)
+                .spacing(12)
+                .pageSnap(true)
+                .pageFling(false)
+                .onLoadComplete {
+                    "onLoadComplete".log("onLoadComplete")
+                    delayed(1000) {
+                        PDDocument.load(File(filePath.toString())).use { document ->
+                            var pageIndex = 0
+                            // Iterate over every page in the document.
+                            for (page in document.pages) {
+                                page.annotations.forEach { annotation ->
+                                    val subtype = annotation.subtype
+                                    if (annotation is PDAnnotationTextMarkup) {
+                                        val quadPoints = annotation.quadPoints
+
+                                        if (quadPoints.size >= 8) {
+                                            val xValues = listOf(quadPoints[0], quadPoints[2], quadPoints[4], quadPoints[6])
+                                            val yValues = listOf(quadPoints[1], quadPoints[3], quadPoints[5], quadPoints[7])
+                                            val left = xValues.minOrNull() ?: 0f
+                                            val right = xValues.maxOrNull() ?: 0f
+                                            val top = yValues.maxOrNull() ?: 0f
+                                            val bottom = yValues.minOrNull() ?: 0f
+                                            val coordinates = Coordinates(left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble())
+
+                                            when (subtype) {
+                                                PDAnnotationTextMarkup.SUB_TYPE_HIGHLIGHT ->
+                                                    pdfView.addHighlightExisting(HighlightModel(System.currentTimeMillis(), "", "#FFFF00", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf()))
+
+                                                PDAnnotationTextMarkup.SUB_TYPE_UNDERLINE ->
+                                                    pdfView.addUnderlineExisting(UnderlineModel(System.currentTimeMillis(), "", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf()))
+
+                                                PDAnnotationTextMarkup.SUB_TYPE_STRIKEOUT ->
+                                                    pdfView.addStrikeThroughExisting(StrikeThroughModel(System.currentTimeMillis(), "", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf()))
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            pageIndex++
+                        }
+
+                        binding?.progressBar?.visibility = View.GONE
+                        "onLoadComplete".log("onLoadComplete")
+                    }
+                }
                 .load()
         } else {
             Toast.makeText(this@EditPdfActivity, "pdf file not found", Toast.LENGTH_SHORT).show()
@@ -57,11 +105,9 @@ class EditPdfActivity : BaseActivity<ActivityEditPdfBinding>(ActivityEditPdfBind
         }
 
         override fun onPreparationSuccess() {
-            binding?.progressBar?.visibility = View.GONE
         }
 
         override fun onPreparationFailed(error: String, e: Exception?) {
-            binding?.progressBar?.visibility = View.GONE
         }
 
         override fun onPageChanged(pageIndex: Int, paginationPageIndex: Int) {
@@ -104,50 +150,62 @@ class EditPdfActivity : BaseActivity<ActivityEditPdfBinding>(ActivityEditPdfBind
             drawingView.beGone()
             val selectionData = pdfView.textSelection
             val selectedText = selectionData.getSelectedText()
-            pdfView.addHighlight(
-                HighlightModel(
-                    System.currentTimeMillis(),
-                    selectedText,
-                    "#FFFF00",
-                    selectionData.getPdfPageNumber(),
-                    System.currentTimeMillis(),
-                    selectionData.getStartEndCoordinates(),
-                    selectionData.getSelections()
+            if (selectedText.isNotEmpty()) {
+                pdfView.addHighlight(
+                    HighlightModel(
+                        System.currentTimeMillis(),
+                        selectedText,
+                        "#FFFF00",
+                        selectionData.getPdfPageNumber(),
+                        System.currentTimeMillis(),
+                        selectionData.getStartEndCoordinates(),
+                        selectionData.getSelections()
+                    )
                 )
-            )
-            pdfView.clearAllTextSelectionAndCoordinates()
+                pdfView.clearAllTextSelectionAndCoordinates()
+            } else {
+                Toast.makeText(this@EditPdfActivity, "Please select text to apply highlight", Toast.LENGTH_SHORT).show()
+            }
         }
         actionUnderline.setOnClickListener {
             drawingView.beGone()
             val selectionData = pdfView.textSelection
             val selectedText = selectionData.getSelectedText()
-            pdfView.addUnderline(
-                UnderlineModel(
-                    System.currentTimeMillis(),
-                    selectedText,
-                    selectionData.getPdfPageNumber(),
-                    System.currentTimeMillis(),
-                    selectionData.getStartEndCoordinates(),
-                    selectionData.getSelections()
+            if (selectedText.isNotEmpty()) {
+                pdfView.addUnderline(
+                    UnderlineModel(
+                        System.currentTimeMillis(),
+                        selectedText,
+                        selectionData.getPdfPageNumber(),
+                        System.currentTimeMillis(),
+                        selectionData.getStartEndCoordinates(),
+                        selectionData.getSelections()
+                    )
                 )
-            )
-            pdfView.clearAllTextSelectionAndCoordinates()
+                pdfView.clearAllTextSelectionAndCoordinates()
+            } else {
+                Toast.makeText(this@EditPdfActivity, "Please select text to apply underline", Toast.LENGTH_SHORT).show()
+            }
         }
         actionStrikethrough.setOnClickListener {
             drawingView.beGone()
             val selectionData = pdfView.textSelection
             val selectedText = selectionData.getSelectedText()
-            pdfView.addStrikeThrough(
-                StrikeThroughModel(
-                    System.currentTimeMillis(),
-                    selectedText,
-                    selectionData.getPdfPageNumber(),
-                    System.currentTimeMillis(),
-                    selectionData.getStartEndCoordinates(),
-                    selectionData.getSelections()
+            if (selectedText.isNotEmpty()) {
+                pdfView.addStrikeThrough(
+                    StrikeThroughModel(
+                        System.currentTimeMillis(),
+                        selectedText,
+                        selectionData.getPdfPageNumber(),
+                        System.currentTimeMillis(),
+                        selectionData.getStartEndCoordinates(),
+                        selectionData.getSelections()
+                    )
                 )
-            )
-            pdfView.clearAllTextSelectionAndCoordinates()
+                pdfView.clearAllTextSelectionAndCoordinates()
+            } else {
+                Toast.makeText(this@EditPdfActivity, "Please select text to apply strikethrough", Toast.LENGTH_SHORT).show()
+            }
         }
 
         actionSignature.setOnClickListener {
@@ -182,16 +240,18 @@ class EditPdfActivity : BaseActivity<ActivityEditPdfBinding>(ActivityEditPdfBind
     }
 
     override fun ActivityEditPdfBinding.initView() {
+        updateNavigationBarColor(R.color.colorCardBackground)
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        onBackPressedDispatcher.addCallback(this@EditPdfActivity, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                viewSaveSheet("${System.currentTimeMillis()}") { action: Int, value: String ->
-                    if (action == 1) {
+        buttonSave.setOnClickListener {
+            viewSaveSheet("${System.currentTimeMillis()}", isDiscardEnable = false) { action: Int, value: String ->
+                if (action == 1) {
+                    layoutSave.beVisible()
+                    CoroutineScope(Dispatchers.IO).launch {
                         binding?.pdfView?.apply {
                             if (findAllAnnotations().size > 0) {
                                 val highlighter = PDFHighlighter()
-                                val viewWidth = pdfView.width.toFloat()
-                                val viewHeight = pdfView.height.toFloat()
+                                val viewWidth = drawingView.width.toFloat()
+                                val viewHeight = drawingView.height.toFloat()
                                 highlighter.processAnnotations(
                                     annotations = findAllAnnotations(),
                                     viewWidth = viewWidth,
@@ -210,6 +270,43 @@ class EditPdfActivity : BaseActivity<ActivityEditPdfBinding>(ActivityEditPdfBind
                             }
                         }?.run {
                             finish()
+                        }
+                    }
+                } else if (action == 2) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this@EditPdfActivity, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewSaveSheet("${System.currentTimeMillis()}", isDiscardEnable = true) { action: Int, value: String ->
+                    if (action == 1) {
+                        layoutSave.beVisible()
+                        CoroutineScope(Dispatchers.IO).launch {
+                            binding?.pdfView?.apply {
+                                if (findAllAnnotations().size > 0) {
+                                    val highlighter = PDFHighlighter()
+                                    val viewWidth = drawingView.width.toFloat()
+                                    val viewHeight = drawingView.height.toFloat()
+                                    highlighter.processAnnotations(
+                                        annotations = findAllAnnotations(),
+                                        viewWidth = viewWidth,
+                                        viewHeight = viewHeight,
+                                        src = filePath,
+                                        dest = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "${value.replace(".pdf", "")}.pdf").absolutePath
+                                    )
+                                    { isError: Boolean, message: String? ->
+                                        if (isError) {
+                                            Toast.makeText(this@EditPdfActivity, message, Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            MediaScannerConnection.scanFile(this@EditPdfActivity, arrayOf(File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "${value.replace(".pdf", "")}.pdf").absolutePath), null, null)
+                                            documentViewModel?.insertToCurrentList(mutableListOf(File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "${value.replace(".pdf", "")}.pdf")))
+                                        }
+                                    }
+                                }
+                            }?.run {
+                                finish()
+                            }
                         }
                     } else if (action == 2) {
                         finish()

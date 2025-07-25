@@ -8,7 +8,7 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 @Database(entities = [Recent::class, Favorite::class], version = 1)
 abstract class PDFReaderDatabase : RoomDatabase() {
     abstract fun recentDao(): RecentDao
-    abstract fun favoriteDao(): FavoriteDao
+    abstract fun favoriteLikeDao(): FavoriteLikeDao
 
     companion object {
         @Volatile

@@ -68,8 +68,6 @@ class CommonAdapter(
                                     .dontAnimate()
                                     .placeholder(iconFile)
                                     .centerCrop()
-                                    .override(Target.SIZE_ORIGINAL)
-                                    .placeholder(iconFile)
                                     .skipMemoryCache(false)
                             ).into(fileIcon)
                         fileCard.isSelected = isDirectory

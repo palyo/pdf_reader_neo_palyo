@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/ic_bg_rounded_sheet"
+    android:backgroundTint="@color/colorWhite"
+    android:clipToOutline="true"
+    android:paddingTop="@dimen/_12sdp"
+    android:paddingBottom="@dimen/_8sdp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/drag_handle"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        app:cardBackgroundColor="@color/colorCardBackground"
+        app:cardElevation="@dimen/_0sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="@dimen/_0sdp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/colorCardBackground"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="@dimen/_0sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drag_handle">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_file"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_file_title"
+        style="@style/TextBold"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="start"
+        android:text="Title"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/text_file_creation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/card_icon"
+        app:layout_constraintTop_toTopOf="@id/card_icon"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_file_creation"
+        style="@style/TextRegular"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="start"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="Created: --/--/--"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@id/card_icon"
+        app:layout_constraintEnd_toEndOf="@id/text_file_title"
+        app:layout_constraintStart_toStartOf="@id/text_file_title"
+        app:layout_constraintTop_toBottomOf="@id/text_file_title" />
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/colorCardBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_icon" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_option_more"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_export_pdf"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:text="@string/tool_export_as_pdf"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_0sdp"
+            app:fontFamily="@font/bold"
+            app:icon="@drawable/ic_file_icon_pdf"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_export_jpg"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:text="@string/tool_save_as_jpeg"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_0sdp"
+            app:fontFamily="@font/bold"
+            app:icon="@drawable/ic_file_icon_jpg"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_export_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_option_share"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_share_pdf"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:text="@string/tool_share_as_pdf"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_0sdp"
+            app:fontFamily="@font/bold"
+            app:icon="@drawable/ic_file_icon_pdf"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_share_jpg"
+            style="@style/MaterialButtonTransparent"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:text="@string/tool_share_as_jpeg"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_0sdp"
+            app:fontFamily="@font/bold"
+            app:icon="@drawable/ic_file_icon_jpg"
+            app:iconPadding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_share_pdf" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

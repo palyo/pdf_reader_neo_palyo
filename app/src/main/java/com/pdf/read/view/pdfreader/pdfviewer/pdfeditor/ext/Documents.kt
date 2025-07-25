@@ -4,6 +4,7 @@ import android.annotation.*
 import android.content.*
 import android.provider.*
 import android.webkit.*
+import coder.apps.space.library.extension.*
 import java.io.*
 
 @SuppressLint("Range")
@@ -22,9 +23,9 @@ fun Context.fetchDocument(load: ((File) -> Unit)? = null, complete: ((MutableLis
             DOC_FILE, XLS_FILE, PPT_FILE -> (MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?")
             TXT_FILE, PDF_FILE -> MediaStore.Files.FileColumns.MIME_TYPE + "=?"
             else -> (MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?")
+                + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?"
+                + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?"
+                + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?" + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + "=?")
         }
         val args = when (type) {
             DOC_FILE -> arrayOf(doc, docx)

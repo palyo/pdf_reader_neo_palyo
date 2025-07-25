@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_navigation_favorite"
         android:title="@string/title_favorite" />
 
+    <item
+        android:id="@+id/navigation_tool"
+        android:icon="@drawable/ic_navigation_tool"
+        android:title="@string/title_tools" />
+
 </menu>

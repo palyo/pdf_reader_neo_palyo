@@ -27,15 +27,15 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.*
-import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.listener.OnDrawListener
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.model.*
 import com.tom_roush.pdfbox.pdmodel.*
-import com.tom_roush.pdfbox.text.*
+import com.tom_roush.pdfbox.pdmodel.interactive.annotation.*
 import kotlinx.coroutines.*
 import java.io.*
 import java.util.*
 
 class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfReaderBinding::inflate) {
+
     private var favorite: Favorite? = null
     private var isFavorite: Boolean = false
     private var fileName: String? = null
@@ -101,16 +101,18 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
                         if (favorite == null) {
                             isFavorite = true
                             favorite = Favorite(fullName = fileName.toString(), filePath = filePath.toString())
-                            favorite?.let { favoriteDao.insert(it) }
+                            favorite?.let { favoriteLikeDao.insert(it) }
                         } else {
                             favorite?.let {
                                 favorite = null
                                 isFavorite = false
-                                favoriteDao.delete(it)
+                                favoriteLikeDao.delete(it)
                             }
                         }
                         launch(Dispatchers.Main) {
-                            toolbar.menu.findItem(R.id.action_favorite).icon = ContextCompat.getDrawable(this@PDFReaderActivity, if (isFavorite) R.drawable.ic_navigation_favorite_active else R.drawable.ic_navigation_favorite_normal)
+                            toolbar.menu.findItem(R.id.action_favorite).icon = ContextCompat.getDrawable(
+                                this@PDFReaderActivity, if (isFavorite) R.drawable.ic_navigation_favorite_active else R.drawable.ic_navigation_favorite_normal
+                            )
                         }
                     }
                     return@setOnMenuItemClickListener true
@@ -160,15 +162,6 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
         }
     }
 
-    fun ActivityPdfReaderBinding.searchInPdf(query: String) {
-        val highlighter = PDFHighlighter()
-        pdfView.jumpTo(highlighter.getPageNumberForQuery(query,File(filePath.toString())))
-
-        highlights.clear()
-        highlights.addAll(getTextPositions(File(filePath.toString()), query))
-        pdfView.redraw()
-    }
-
     private fun toggleOrientation() {
         val newOrientation = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -179,7 +172,7 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
     }
 
     private fun copyTextToClipboard(text: String) {
-        val copyManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val copyManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         copyManager.setPrimaryClip(ClipData.newPlainText("text", text))
         Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show()
     }
@@ -194,7 +187,7 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
         }
 
         try {
-            val printManager = primaryBaseActivity?.getSystemService(Context.PRINT_SERVICE) as PrintManager
+            val printManager = primaryBaseActivity?.getSystemService(PRINT_SERVICE) as PrintManager
             val printAdapter = PdfDocumentAdapter(pdfFile)
             val jobName = "${getString(R.string.app_name)} - ${pdfFile.name}"
             printManager.print(jobName, printAdapter, null)
@@ -210,11 +203,9 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
         }
 
         override fun onPreparationSuccess() {
-            binding?.progressHorizontal?.visibility = View.GONE
         }
 
         override fun onPreparationFailed(error: String, e: Exception?) {
-            binding?.progressHorizontal?.visibility = View.GONE
         }
 
         override fun onPageChanged(pageIndex: Int, paginationPageIndex: Int) {
@@ -248,7 +239,7 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
             mergeId: Int,
             mergeType: PdfFile.MergeType,
             message: String,
-            exception: java.lang.Exception?
+            exception: java.lang.Exception?,
         ) {
         }
     }
@@ -278,56 +269,77 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
         layoutFullscreenControls.beVisible()
     }
 
-    private val highlights = mutableListOf<Pair<Int, RectF>>()
-    fun getTextPositions(pdfFile: File, searchText: String): List<Pair<Int, RectF>> {
-        val pdfDocument = PDDocument.load(pdfFile)
-        val stripper = PDFTextStripperByArea()
-
-        val highlights = mutableListOf<Pair<Int, RectF>>() // Stores (Page Number, RectF)
-
-        for (page in 1..pdfDocument.numberOfPages) {
-            val pageText = stripper.getText(pdfDocument)
-
-            if (pageText.contains(searchText, ignoreCase = true)) {
-                val startIndex = pageText.indexOf(searchText, ignoreCase = true)
-                val endIndex = startIndex + searchText.length
-
-                // Get text bounding box (requires font metrics)
-                val rect = RectF(50f, 100f, 300f, 150f) // Example, adjust dynamically
-                highlights.add(Pair(page, rect))
-            }
-        }
-        pdfDocument.close()
-        return highlights
-    }
-
     override fun ActivityPdfReaderBinding.initView() {
         init()
+
+        if (filePath.isNullOrEmpty() || !File(filePath).exists()) {
+            Toast.makeText(this@PDFReaderActivity, "File not access: $filePath", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
+
         pdfView.attachCoroutineScope(pdfRenderScope)
             .setListener(pdfCallBack)
         pdfView
             .fromFile(File(filePath.toString()))
             .defaultPage(0)
-            .enableAnnotationRendering(true)
-            .enableAntialiasing(true)
             .nightMode(tinyDB?.getBoolean(NIGHT_MODE, false) == true)
-            .onDraw { canvas, pageWidth, pageHeight, displayedPage, zoom ->
-                highlights.forEach { (page, rect) ->
-                    if (displayedPage == page) {
-                        val paint = Paint().apply {
-                            color = Color.YELLOW
-                            alpha = 100
-                            style = Paint.Style.FILL
+            .enableAnnotationRendering(true)
+            .autoSpacing(true)
+            .spacing(12)
+            .pageSnap(true)
+            .pageFling(false)
+            .onLoadComplete {
+                "onLoadComplete".log("onLoadComplete")
+                delayed(1000) {
+                    PDDocument.load(File(filePath.toString())).use { document ->
+                        var pageIndex = 0
+                        // Iterate over every page in the document.
+                        for (page in document.pages) {
+                            page.annotations.forEach { annotation ->
+                                val subtype = annotation.subtype
+                                if (annotation is PDAnnotationTextMarkup) {
+                                    val quadPoints = annotation.quadPoints
+
+                                    if (quadPoints.size >= 8) {
+                                        val xValues = listOf(quadPoints[0], quadPoints[2], quadPoints[4], quadPoints[6])
+                                        val yValues = listOf(quadPoints[1], quadPoints[3], quadPoints[5], quadPoints[7])
+                                        val left = xValues.minOrNull() ?: 0f
+                                        val right = xValues.maxOrNull() ?: 0f
+                                        val top = yValues.maxOrNull() ?: 0f
+                                        val bottom = yValues.minOrNull() ?: 0f
+                                        val coordinates = Coordinates(left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble())
+
+                                        when (subtype) {
+                                            PDAnnotationTextMarkup.SUB_TYPE_HIGHLIGHT ->
+                                                pdfView.addHighlightExisting(
+                                                    HighlightModel(System.currentTimeMillis(), "", "#FFFF00", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf())
+                                                )
+
+                                            PDAnnotationTextMarkup.SUB_TYPE_UNDERLINE ->
+                                                pdfView.addUnderlineExisting(UnderlineModel(System.currentTimeMillis(), "", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf()))
+
+                                            PDAnnotationTextMarkup.SUB_TYPE_STRIKEOUT ->
+                                                pdfView.addStrikeThroughExisting(StrikeThroughModel(System.currentTimeMillis(), "", pageIndex + 1, System.currentTimeMillis(), coordinates, listOf()))
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        canvas.drawRect(rect, paint)
+
+                        pageIndex++
                     }
+
+                    binding?.progressHorizontal?.visibility = View.GONE
+                    "onLoadComplete".log("onLoadComplete")
                 }
             }
             .load()
 
-        toolbar.menu?.findItem(R.id.action_share)?.setVisible(Intent.ACTION_VIEW != intent.action)
-        toolbar.menu?.findItem(R.id.action_favorite)?.setVisible(Intent.ACTION_VIEW != intent.action)
-        toolbar.menu?.findItem(R.id.action_print)?.setVisible(Intent.ACTION_VIEW != intent.action)
+
+        toolbar.menu?.findItem(R.id.action_share)?.isVisible = Intent.ACTION_VIEW != intent.action
+        toolbar.menu?.findItem(R.id.action_favorite)?.isVisible = Intent.ACTION_VIEW != intent.action
+        toolbar.menu?.findItem(R.id.action_print)?.isVisible = Intent.ACTION_VIEW != intent.action
         layoutControls.beVisibleIf(Intent.ACTION_VIEW != intent.action)
         updateTheme()
         viewBanner(adBanner)
@@ -362,10 +374,12 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            favorite = favoriteDao.isFavorite(filePath.toString())
+            favorite = favoriteLikeDao.isFavorite(filePath.toString())
             isFavorite = favorite != null
             launch(Dispatchers.Main) {
-                toolbar.menu.findItem(R.id.action_favorite).icon = ContextCompat.getDrawable(this@PDFReaderActivity, if (favorite != null) R.drawable.ic_navigation_favorite_active else R.drawable.ic_navigation_favorite_normal)
+                toolbar.menu.findItem(R.id.action_favorite).icon = ContextCompat.getDrawable(
+                    this@PDFReaderActivity, if (favorite != null) R.drawable.ic_navigation_favorite_active else R.drawable.ic_navigation_favorite_normal
+                )
             }
             recentDao.insert(Recent(fullName = fileName.toString(), filePath = filePath.toString()))
         }
@@ -384,13 +398,13 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
 
     private fun ActivityPdfReaderBinding.updateTheme() {
         if (tinyDB?.getBoolean(NIGHT_MODE, false) == true) {
-            toolbar.menu?.findItem(R.id.action_theme)?.setTitle(getString(R.string.title_light))
+            toolbar.menu?.findItem(R.id.action_theme)?.title = getString(R.string.title_light)
             toolbar.overflowIcon = ContextCompat.getDrawable(this@PDFReaderActivity, R.drawable.ic_menu_options_dark)
             val iconColor = ContextCompat.getColor(this@PDFReaderActivity, R.color.colorPrimary)
             val cardColor = ContextCompat.getColor(this@PDFReaderActivity, R.color.colorIcon)
-            toolbar.menu?.findItem(R.id.action_share)?.setIconTintList(ColorStateList.valueOf(iconColor))
-            toolbar.menu?.findItem(R.id.action_favorite)?.setIconTintList(ColorStateList.valueOf(iconColor))
-            toolbar.menu?.findItem(R.id.action_print)?.setIconTintList(ColorStateList.valueOf(iconColor))
+            toolbar.menu?.findItem(R.id.action_share)?.iconTintList = ColorStateList.valueOf(iconColor)
+            toolbar.menu?.findItem(R.id.action_favorite)?.iconTintList = ColorStateList.valueOf(iconColor)
+            toolbar.menu?.findItem(R.id.action_print)?.iconTintList = ColorStateList.valueOf(iconColor)
             toolbar.setTitleTextColor(iconColor)
             layoutTopBar.setBackgroundColor(ContextCompat.getColor(this@PDFReaderActivity, coder.apps.space.library.R.color.colorBlack))
             toolbar.popupTheme = R.style.Theme_PdfReaderNeo_PopupMenu_Dark
@@ -414,13 +428,13 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
             updateStatusBarColor(coder.apps.space.library.R.color.colorBlack)
             updateWindows(isLight = false)
         } else {
-            toolbar.menu?.findItem(R.id.action_theme)?.setTitle(getString(R.string.title_night))
+            toolbar.menu?.findItem(R.id.action_theme)?.title = getString(R.string.title_night)
             toolbar.overflowIcon = ContextCompat.getDrawable(this@PDFReaderActivity, R.drawable.ic_menu_options)
             val iconColor = ContextCompat.getColor(this@PDFReaderActivity, R.color.colorIcon)
             val cardColor = ContextCompat.getColor(this@PDFReaderActivity, R.color.colorCardBackground)
-            toolbar.menu?.findItem(R.id.action_share)?.setIconTintList(ColorStateList.valueOf(iconColor))
-            toolbar.menu?.findItem(R.id.action_favorite)?.setIconTintList(ColorStateList.valueOf(iconColor))
-            toolbar.menu?.findItem(R.id.action_print)?.setIconTintList(ColorStateList.valueOf(iconColor))
+            toolbar.menu?.findItem(R.id.action_share)?.iconTintList = ColorStateList.valueOf(iconColor)
+            toolbar.menu?.findItem(R.id.action_favorite)?.iconTintList = ColorStateList.valueOf(iconColor)
+            toolbar.menu?.findItem(R.id.action_print)?.iconTintList = ColorStateList.valueOf(iconColor)
             toolbar.setTitleTextColor(iconColor)
             layoutTopBar.setBackgroundColor(ContextCompat.getColor(this@PDFReaderActivity, coder.apps.space.library.R.color.colorPrimary))
             toolbar.popupTheme = R.style.Theme_PdfReaderNeo_PopupMenu_Light
@@ -495,7 +509,7 @@ class PDFReaderActivity : BaseActivity<ActivityPdfReaderBinding>(ActivityPdfRead
                 } else finish()
             }
         } else {
-            filePath = intent.getStringExtra(FILE_PATH)// fileUri = intent.extras?.get(FILE_URI) as Uri?
+            filePath = intent.getStringExtra(FILE_PATH) // fileUri = intent.extras?.get(FILE_URI) as Uri?
             fileName = intent.getStringExtra(FILE_NAME)
             fileUri = FileProvider.getUriForFile(this@PDFReaderActivity, "${packageName}.provider", File(filePath.toString()))
             if (filePath?.let { File(it).exists() } == true) {

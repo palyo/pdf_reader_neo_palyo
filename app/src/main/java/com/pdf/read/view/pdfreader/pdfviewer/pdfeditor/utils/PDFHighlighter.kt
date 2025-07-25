@@ -4,6 +4,8 @@ import android.graphics.*
 import android.graphics.pdf.*
 import android.os.*
 import android.util.*
+import coder.apps.space.library.extension.*
+import com.google.gson.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.utils.viewer.model.*
 import com.tom_roush.pdfbox.cos.*
 import com.tom_roush.pdfbox.pdmodel.*
@@ -16,7 +18,7 @@ import java.io.*
 import kotlin.math.*
 
 class PDFHighlighter {
-
+    private val TAG = "PDFHighlighter"
     fun extractTextFromPdf(pdfFile: File): String {
         PDDocument.load(pdfFile).use { document ->
             val stripper = PDFTextStripper()
@@ -32,7 +34,7 @@ class PDFHighlighter {
             stripper.endPage = page
             val pageText = stripper.getText(pdfDocument)
             if (pageText.contains(query, ignoreCase = true)) {
-                return page-1
+                return page - 1
             }
         }
         return -1
@@ -62,11 +64,11 @@ class PDFHighlighter {
             annotations.filter { it.asHighlight() != null }.forEach { ann ->
                 ann.asHighlight()?.let { highlightAnn ->
                     val allChars: List<PdfChar> = highlightAnn.segments.mergeAllChars()
-                    // Add the highlight annotation to the PDF (do not save/close here)
                     highlighter.highlightMultiLineSelectedWord(
                         pdfDocument = pdfDocument,
                         pageIndex = highlightAnn.page - 1,
                         selectedChars = allChars,
+                        snippet = highlightAnn.snippet,
                         color = Color.parseColor(highlightAnn.color)
                     )
                 }
@@ -123,6 +125,7 @@ class PDFHighlighter {
         pageIndex: Int,
         selectedChars: List<PdfChar>,
         color: Int = Color.YELLOW,
+        snippet: String = "",
         coordinatesInViewSpace: Boolean = true
     ) {
         try {
@@ -184,7 +187,8 @@ class PDFHighlighter {
                 Color.blue(color) / 255f
             )
             annotation.color = PDColor(colorArray, PDDeviceRGB.INSTANCE)
-            annotation.contents = "Highlighted text"
+            val gson = Gson()
+            annotation.contents = "Highlight ${System.currentTimeMillis()}"
             // Set transparency (opacity) to 0.3.
             annotation.cosObject.setItem(COSName.CA, COSFloat(0.3f))
 
@@ -202,10 +206,9 @@ class PDFHighlighter {
      * @param pageIndex Zero-based index of the page where the selection occurs.
      * @param selectedChars List of PdfChar objects spanning the selection.
      * @param color Android color to use for the underline.
-     * @param outputPath File path to save the updated PDF.
      * @param coordinatesInViewSpace True if your PdfChar positions come from view coordinates (origin top‑left).
      */
-    private fun underlineMultiLineSelectedWord(
+    fun underlineMultiLineSelectedWord(
         pdfDocument: PDDocument,
         pageIndex: Int,
         selectedChars: List<PdfChar>,
@@ -215,8 +218,10 @@ class PDFHighlighter {
         try {
             val page = pdfDocument.getPage(pageIndex)
             val pdfPageHeight = page.mediaBox.height
+
             // Group selected characters by lineId.
             val groups: Map<Int, List<PdfChar>> = selectedChars.groupBy { it.lineId }
+
             val quadPointsList = mutableListOf<Float>()
             var overallMinX = Float.MAX_VALUE
             var overallMinY = Float.MAX_VALUE
@@ -233,6 +238,7 @@ class PDFHighlighter {
                     // X bounds.
                     val charLeft = char.topPosition.x
                     val charRight = char.topPosition.x + char.size.width
+
                     // Convert Y coordinate if needed.
                     val charTopPDF = if (coordinatesInViewSpace) pdfPageHeight - char.topPosition.y else char.topPosition.y
                     val charBottomPDF = char.bottomPosition.y  // assumed in PDF space.
@@ -247,6 +253,7 @@ class PDFHighlighter {
                 overallMaxX = max(overallMaxX, lineMaxX)
                 overallMinY = min(overallMinY, lineMinY)
                 overallMaxY = max(overallMaxY, lineMaxY)
+
                 // For underline, quad points are defined similarly to highlight:
                 // [top-left.x, top-left.y, top-right.x, top-right.y, bottom-left.x, bottom-left.y, bottom-right.x, bottom-right.y]
                 // In PDF space, "top" is the higher Y value.
@@ -258,12 +265,15 @@ class PDFHighlighter {
                 )
                 quadPointsList.addAll(lineQuadPoints.toList())
             }
+
             // Create overall union bounding rectangle.
             val unionRect = PDRectangle(overallMinX, overallMinY, overallMaxX - overallMinX, overallMaxY - overallMinY)
+
             // Create the underline annotation using PDAnnotationTextMarkup with subtype UNDERLINE.
             val annotation = PDAnnotationTextMarkup(PDAnnotationTextMarkup.SUB_TYPE_UNDERLINE)
             annotation.rectangle = unionRect
             annotation.quadPoints = quadPointsList.toFloatArray()
+
             // Convert Android color to PDF color.
             val colorArray = floatArrayOf(
                 Color.red(color) / 255f,
@@ -272,6 +282,7 @@ class PDFHighlighter {
             )
             annotation.color = PDColor(colorArray, PDDeviceRGB.INSTANCE)
             annotation.contents = "Underlined text"
+
 
             page.annotations.add(annotation)
             Log.d("Underline", "Multi-line underline added on page $pageIndex with union rect: $unionRect")
@@ -289,11 +300,10 @@ class PDFHighlighter {
      * @param pageIndex Zero-based index of the page where the selection occurs.
      * @param selectedChars List of PdfChar objects spanning the selection.
      * @param color Android color to use for the strikeout.
-     * @param outputPath File path to save the updated PDF.
      * @param coordinatesInViewSpace True if your PdfChar positions come from view coordinates (origin top‑left)
      *                               so that char.topPosition.y must be converted using the PDF page height.
      */
-    private fun strikeoutMultiLineSelectedWord(
+    fun strikeoutMultiLineSelectedWord(
         pdfDocument: PDDocument,
         pageIndex: Int,
         selectedChars: List<PdfChar>,
@@ -303,13 +313,16 @@ class PDFHighlighter {
         try {
             val page = pdfDocument.getPage(pageIndex)
             val pdfPageHeight = page.mediaBox.height
+
             // Group selected characters by their lineId.
             val groups: Map<Int, List<PdfChar>> = selectedChars.groupBy { it.lineId }
+
             val quadPointsList = mutableListOf<Float>()
             var overallMinX = Float.MAX_VALUE
             var overallMinY = Float.MAX_VALUE
             var overallMaxX = Float.MIN_VALUE
             var overallMaxY = Float.MIN_VALUE
+
             // Thickness of the strikeout band (total thickness); half-thickness is used above and below the center.
             val halfThickness = 1.0f
 
@@ -323,6 +336,7 @@ class PDFHighlighter {
                     // X bounds (using char.topPosition.x and size.width)
                     val charLeft = char.topPosition.x
                     val charRight = char.topPosition.x + char.size.width
+
                     // Convert char.topPosition.y from view space to PDF space if needed.
                     val charTop = if (coordinatesInViewSpace) pdfPageHeight - char.topPosition.y else char.topPosition.y
                     // Assume char.bottomPosition.y is already in PDF space.
@@ -333,16 +347,19 @@ class PDFHighlighter {
                     lineTopPDF = min(lineTopPDF, charTop)       // lower value in PDF space
                     lineBottomPDF = max(lineBottomPDF, charBottom) // higher value
                 }
+
                 // Compute the vertical center for this line.
                 val centerY = (lineTopPDF + lineBottomPDF) / 2.0f
                 // For strikeout, we want a thin band around centerY.
                 val strikeTop = centerY + halfThickness
                 val strikeBottom = centerY - halfThickness
+
                 // Update overall union bounds.
                 overallMinX = min(overallMinX, lineMinX)
                 overallMaxX = max(overallMaxX, lineMaxX)
                 overallMinY = min(overallMinY, strikeBottom)
                 overallMaxY = max(overallMaxY, strikeTop)
+
                 // For each line, create quad points using the computed band.
                 // PDF quad points order: [top-left, top-right, bottom-left, bottom-right]
                 val lineQuadPoints = floatArrayOf(
@@ -353,6 +370,7 @@ class PDFHighlighter {
                 )
                 quadPointsList.addAll(lineQuadPoints.toList())
             }
+
             // Create overall union bounding rectangle.
             val unionRect = PDRectangle(
                 overallMinX,
@@ -360,10 +378,12 @@ class PDFHighlighter {
                 overallMaxX - overallMinX,
                 overallMaxY - overallMinY
             )
+
             // Create the strikeout annotation.
             val annotation = PDAnnotationTextMarkup(PDAnnotationTextMarkup.SUB_TYPE_STRIKEOUT)
             annotation.rectangle = unionRect
             annotation.quadPoints = quadPointsList.toFloatArray()
+
             // Convert Android color to PDF color.
             val colorArray = floatArrayOf(
                 Color.red(color) / 255f,
@@ -412,6 +432,7 @@ class PDFHighlighter {
             true,
             true
         )
+        TAG.log("$x $y $width $height")
         contentStream.drawImage(pdImage, x.toFloat(), y.toFloat(), width.toFloat(), height.toFloat())
         contentStream.close()
     }
@@ -425,17 +446,13 @@ class PDFHighlighter {
                 renderer.close()
                 return false
             }
-
             val page = renderer.openPage(pageIndex)
             val bitmap = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
             page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
             page.close()
             renderer.close()
-
-
             val ssDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Screenshots")
             if (!ssDir.exists()) ssDir.mkdirs()
-
             // Save the screenshot
             val screenshotFile = File(ssDir, "PDF_Screenshot_${System.currentTimeMillis()}.jpeg")
             FileOutputStream(screenshotFile).use { out ->

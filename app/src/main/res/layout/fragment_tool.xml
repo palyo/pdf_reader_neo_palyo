@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/_12sdp"
+    android:paddingVertical="@dimen/_12sdp"
+    tools:context=".fragments.ToolFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_convert"
+        style="@style/TextExtraBold"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/_11ssp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="@string/title_scan_nd_convert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/scan_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toStartOf="@+id/image_to_pdf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_convert">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_scan_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            app:contentPadding="@dimen/_8sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_icon_file_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_scan_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_scan_pdf" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/image_to_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/word_to_pdf"
+        app:layout_constraintStart_toEndOf="@+id/scan_pdf"
+        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_image_to_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_image_to_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_image_to_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_image_to_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/word_to_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/excel_to_pdf"
+        app:layout_constraintStart_toEndOf="@+id/image_to_pdf"
+        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_word_to_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_word_to_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_word_to_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_word_to_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/excel_to_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/word_to_pdf"
+        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_excel_to_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@color/colorCardBackground"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_excel_to_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_excel_to_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_excel_to_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/text_to_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/image_to_pdf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_text_to_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_text_to_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_text_to_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_text_to_pdf" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_pdf_modify"
+        style="@style/TextExtraBold"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/_11ssp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:text="@string/title_modify_pdf"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_to_pdf" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/split_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toStartOf="@+id/merge_pdf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_pdf_modify">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_split_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentPadding="@dimen/_4sdp"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_split" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_split_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_split_pdf" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/merge_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/compress_pdf"
+        app:layout_constraintStart_toEndOf="@+id/split_pdf"
+        app:layout_constraintTop_toTopOf="@+id/split_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_merge_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:contentPadding="@dimen/_4sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_merge" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_merge_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_merge_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/compress_pdf"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/extract_images"
+        app:layout_constraintStart_toEndOf="@+id/merge_pdf"
+        app:layout_constraintTop_toTopOf="@+id/split_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_compress_pdf"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:contentPadding="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:srcCompat="@drawable/ic_action_compress" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_compress_pdf"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_compress_pdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/extract_images"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/compress_pdf"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@+id/split_pdf">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_extract_images"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@color/colorCardBackground"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:contentPadding="@dimen/_8sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_icon_file_pdf" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_extract_images"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_extract_images" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

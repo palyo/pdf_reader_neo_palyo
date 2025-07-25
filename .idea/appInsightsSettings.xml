@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.pdf.read.view.pdfreader.pdfviewer.pdfeditor" />
+                  <option name="mobileSdkAppId" value="1:570575094300:android:3985f8d67ac5803992d5d9" />
+                  <option name="projectId" value="pdf-reader---pdf-viewer-1804d" />
+                  <option name="projectNumber" value="570575094300" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

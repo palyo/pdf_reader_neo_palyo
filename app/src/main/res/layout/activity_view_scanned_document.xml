@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.tools.scanner.ViewScannedDocumentActivity">
+
+    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        android:id="@+id/layout_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorTransparent"
+            android:theme="@style/Theme.Space.AppBarOverlay"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@null"
+                android:theme="@style/Theme.PdfReaderNeo"
+                app:navigationIcon="@drawable/ic_icon_arrow_back"
+                app:popupTheme="@style/Theme.Space.PopupMenu"
+                app:titleTextAppearance="@style/TextAppearance.Space.TitleSmall"
+                app:titleTextColor="@color/colorText">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_history"
+                    style="@style/MaterialButtonTransparent"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="end"
+                    app:elevation="@dimen/_0sdp"
+                    app:icon="@drawable/ic_icon_history"
+                    app:iconPadding="@dimen/_0sdp"
+                    app:iconSize="@dimen/_20sdp" />
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_0sdp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="@dimen/_0sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ad_native"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_page_control"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_0sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toTopOf="@id/bottom_tool"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/page_prev"
+                style="@style/MaterialButtonTransparent"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                app:icon="@drawable/ic_icon_page_prev"
+                app:iconPadding="@dimen/_0sdp"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="@color/colorIcon"
+                app:layout_constraintEnd_toStartOf="@id/page_count"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/page_count"
+                style="@style/TextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_24sdp"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:text="Page 1/1"
+                app:layout_constraintEnd_toStartOf="@id/page_next"
+                app:layout_constraintStart_toEndOf="@id/page_prev"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/page_next"
+                style="@style/MaterialButtonTransparent"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                app:icon="@drawable/ic_icon_page_next"
+                app:iconPadding="@dimen/_0sdp"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="@color/colorIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/page_count"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_tool"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu_share"
+                style="@style/MaterialButtonTransparent"
+                android:layout_width="@dimen/_0sdp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_0sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/menu_share"
+                android:textSize="@dimen/_8sdp"
+                app:icon="@drawable/ic_menu_share"
+                app:iconGravity="textTop"
+                app:iconPadding="@dimen/_8sdp"
+                app:iconSize="@dimen/_14sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_delete"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu_delete"
+                style="@style/MaterialButtonTransparent"
+                android:layout_width="@dimen/_0sdp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_0sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/menu_delete"
+                android:textSize="@dimen/_8sdp"
+                app:icon="@drawable/ic_menu_delete"
+                app:iconGravity="textTop"
+                app:iconPadding="@dimen/_8sdp"
+                app:iconSize="@dimen/_14sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_more"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/menu_share" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu_more"
+                style="@style/MaterialButtonTransparent"
+                android:layout_width="@dimen/_0sdp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_0sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/tool_more"
+                android:textSize="@dimen/_8sdp"
+                app:icon="@drawable/ic_tool_more"
+                app:iconGravity="textTop"
+                app:iconPadding="@dimen/_8sdp"
+                app:iconSize="@dimen/_14sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/menu_delete" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <coder.apps.space.library.widgets.AdsView
+        android:id="@+id/ad_native"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/native_65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shimmer_preview_layout="@layout/ad_unified_banner_loading" />
+</androidx.constraintlayout.widget.ConstraintLayout>

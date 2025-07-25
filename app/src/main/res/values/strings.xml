@@ -5,7 +5,6 @@
     <string name="title_sheet_permission">Permission Required</string>
     <string name="body_sheet_storage_permission">To read and edit files on your device, please allow to access all your files.</string>
     <string name="label_allow_access_to_all_files">Allow access to manage all files</string>
-    <string name="button_allow">Allow</string>
     <string name="title_home">Home</string>
     <string name="title_recent">Recent</string>
     <string name="title_favorite">Favorite</string>
@@ -65,5 +64,104 @@
     <string name="ic_intro_body_1">Manage all your document files.</string>
     <string name="ic_intro_body_2">Perform highlight, underline, strikethrough, and more.</string>
     <string name="ic_intro_body_3">Organize and manage all document files at one place.</string>
-    <string name="message_contain_ad">This action may contain ad</string>
+    <string name="message_contain_ad">This action might contain ad</string>
+
+    <string name="sheet_title_sort">Sort by</string>
+    <string name="menu_sort">Sort</string>
+    <string name="sheet_title_sort_order">Order</string>
+    <string name="empty_title_search">Oops! Nothing Here</string>
+    <string name="empty_body_search">We couldn\'t find anything matching your search. Try using different keywords.</string>
+    <string name="title_tools">Tools</string>
+    <string name="title_image_to_pdf">Image to PDF</string>
+    <string name="title_word_to_pdf">Word to PDF</string>
+    <string name="title_text_to_pdf">Text to PDF</string>
+    <string name="title_excel_to_pdf">Excel to PDF</string>
+    <string name="action_convert">Convert</string>
+    <string name="title_save_as">Save as</string>
+    <string name="hint_name_without_extension">Name without extension</string>
+    <string name="message_rename_validation">Enter valid file name</string>
+    <string name="progress_label_converting_pdf">Converting to PDF…</string>
+    <string name="tool_gallery">Gallery</string>
+    <string name="tool_document">Document</string>
+    <string name="tool_id_card">ID Card</string>
+
+    <string name="message_please_scan_one_document">Please scan at least one document before proceeding.</string>
+    <string name="note_front_page">Front side</string>
+    <string name="note_back_page">Back side</string>
+    <string name="button_apply_to_all">Apply to all</string>
+
+    <string name="tool_auto_crop">Auto Crop</string>
+    <string name="tool_full_crop">Full crop</string>
+
+    <string name="tool_original">Original</string>
+    <string name="tool_bw">B/W</string>
+    <string name="tool_sketch">Sketch</string>
+    <string name="tool_monochrome">Monochrome</string>
+    <string name="tool_toon">Toon</string>
+    <string name="tool_sharpen">Sharpen</string>
+    <string name="tool_contrast">Contrast</string>
+    <string name="tool_brightness">Brightness</string>
+    <string name="tool_filter">Filter</string>
+    <string name="tool_crop">Crop</string>
+    <string name="tool_retake">Retake</string>
+    <string name="tool_more">More</string>
+    <string name="tool_save">Save</string>
+    <string name="tool_keep_scanning">Keep scanning</string>
+    <string name="label_continue_adding_more_pages">Continue adding more pages</string>
+    <string name="label_page_count">Page %1$d/%2$d</string>
+    <string name="title_discard_changes">Discard changes?</string>
+    <string name="description_discard">You have unsaved changes to your image. If you discard now, all edits will be lost. Are you sure you want to continue?</string>
+    <string name="button_scan_now">Scan now</string>
+
+    <string name="label_permission_need_permission">Need permission</string>
+    <string name="message_manage_permission_description">To manage files, please allow Document Tools to access files on your device.</string>
+    <string name="message_camera_permission_description">To scan document, please allow Document Tools to access your device camera.</string>
+    <string name="label_camera_permission">Camera</string>
+    <string name="button_allow">ALLOW</string>
+    <string name="label_app_permissions">App permissions</string>
+
+
+    <string name="title_no_scanned_found">No scanned found</string>
+    <string name="description_no_scanned_found">No scanned data found, please add by clicking on the button below</string>
+    <string name="title_document_scanner">Document Scanner</string>
+    <string name="menu_info">Details</string>
+    <string name="message_document_deleted_successfully">Document deleted successfully</string>
+
+    <string name="tool_export_as_pdf">Export as PDF</string>
+    <string name="tool_save_as_jpeg">Save as JPEG</string>
+    <string name="tool_share_as_pdf">Share as PDF</string>
+    <string name="tool_share_as_jpeg">Share as JPEG</string>
+
+    <string name="message_pdf_saved_successfully">PDF saved successfully!</string>
+    <string name="message_images_saved_successfully">Images saved successfully!</string>
+    <string name="title_scan_nd_convert">--- Scan &amp; Convert ---</string>
+    <string name="action_scan_pdf">Scan\npdf</string>
+    <string name="action_image_to_pdf">Image to\npdf</string>
+    <string name="action_word_to_pdf">Word to\npdf</string>
+    <string name="action_excel_to_pdf">Excel to\npdf</string>
+    <string name="action_text_to_pdf">Text to\npdf</string>
+    <string name="title_modify_pdf">--- Modify pdf ---</string>
+    <string name="action_split_pdf">Split\npdf</string>
+    <string name="action_merge_pdf">Merge\npdf</string>
+    <string name="action_extract_images">Extract\nimages</string>
+    <string name="action_compress_pdf">Compress\npdf</string>
+
+    <string name="label_choose_a_files">Choose a files</string>
+    <string name="note_supported_files_image">Supported files: Image</string>
+    <string name="note_supported_files_text">Supported files: TEXT</string>
+    <string name="note_supported_files_excel">Supported files: XLS/XLSX</string>
+    <string name="note_supported_files_word">Supported files: DOC/DOCX</string>
+    <string name="note_supported_files_pdf">Supported files: PDF</string>
+
+    <string name="progress_label_merging">Merging…</string>
+    <string name="progress_label_splitting">Splitting…</string>
+    <string name="progress_label_compressing">Compressing…</string>
+    <string name="progress_label_extracting">Extracting…</string>
+
+    <string name="message_has_only_1_page">Selected PDF can\'t be split because it has only 1 page!</string>
+    <string name="message_range_selected_pdf_again">Entered split range will create selected PDF again!</string>
+    <string name="message_split_complete">The selected PDF was split successfully. It was split into %1$s PDF(s)</string>
+    <string name="message_invalid_input">Invalid input</string>
+    <string name="message_invalid_range_input">Invalid range input</string>
+    <string name="message_invalid_page_number">Invalid page number</string>
 </resources>

@@ -8,16 +8,23 @@ import com.google.android.gms.ads.interstitial.*
 
 private const val TAG = "AdmobInterstitial"
 private var admobInterstitialAd: InterstitialAd? = null
+private var isLoadingAd = false
+
 fun Context.loadInterAd(listener: ((result: Boolean) -> Unit)? = null) {
+    if (isLoadingAd) return
+
+    isLoadingAd = true
     val adRequest = AdRequest.Builder().build()
     InterstitialAd.load(this, INTER_ID, adRequest,
         object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
+                isLoadingAd = false
                 admobInterstitialAd = null
                 listener?.invoke(true)
             }
 
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                isLoadingAd = false
                 admobInterstitialAd = interstitialAd
                 listener?.invoke(false)
             }
@@ -82,8 +89,11 @@ fun Activity.viewInterAdForce(listener: ((result: Boolean) -> Unit)? = null) {
 fun Activity.viewInterAd(listener: ((result: Boolean) -> Unit)? = null) {
     if (admobInterstitialAd != null) {
         displayInter(listener)
-    } else {
+    } else if (!isLoadingAd) {
+        listener?.invoke(true)
         loadInterAd()
+    } else {
+        listener?.invoke(true)
     }
 }
 

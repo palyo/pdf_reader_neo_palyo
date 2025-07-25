@@ -30,10 +30,7 @@ class PagesLoader {
 
         @Override
         public String toString() {
-            return "Holder{" +
-                    "row=" + row +
-                    ", col=" + col +
-                    '}';
+            return "Holder{" + "row=" + row + ", col=" + col + '}';
         }
     }
 
@@ -52,12 +49,7 @@ class PagesLoader {
 
         @Override
         public String toString() {
-            return "RenderRange{" +
-                    "page=" + page +
-                    ", gridSize=" + gridSize +
-                    ", leftTop=" + leftTop +
-                    ", rightBottom=" + rightBottom +
-                    '}';
+            return "RenderRange{" + "page=" + page + ", gridSize=" + gridSize + ", leftTop=" + leftTop + ", rightBottom=" + rightBottom + '}';
         }
     }
 
@@ -67,10 +59,7 @@ class PagesLoader {
 
         @Override
         public String toString() {
-            return "GridSize{" +
-                    "rows=" + rows +
-                    ", cols=" + cols +
-                    '}';
+            return "GridSize{" + "rows=" + rows + ", cols=" + cols + '}';
         }
     }
 
@@ -218,8 +207,7 @@ class PagesLoader {
         }
     }
 
-    private int loadPage(int page, int firstRow, int lastRow, int firstCol, int lastCol,
-                         int nbOfPartsLoadable) {
+    private int loadPage(int page, int firstRow, int lastRow, int firstCol, int lastCol, int nbOfPartsLoadable) {
         int loaded = 0;
         for (int row = firstRow; row <= lastRow; row++) {
             for (int col = firstCol; col <= lastCol; col++) {
@@ -254,9 +242,7 @@ class PagesLoader {
 
         if (renderWidth > 0 && renderHeight > 0) {
             if (!pdfView.getCacheManager().upPartIfContained(page, pageRelativeBounds, cacheOrder)) {
-                pdfView.getRenderingHandler().addRenderingTask(page, renderWidth, renderHeight,
-                        pageRelativeBounds, false, cacheOrder, pdfView.isBestQuality(),
-                        pdfView.isAnnotationRendering());
+                pdfView.getRenderingHandler().addRenderingTask(page, renderWidth, renderHeight, pageRelativeBounds, false, cacheOrder, pdfView.isBestQuality(), pdfView.isAnnotationRendering());
             }
 
             cacheOrder++;
@@ -270,9 +256,7 @@ class PagesLoader {
         float thumbnailWidth = pageSize.getWidth() * Constants.THUMBNAIL_RATIO;
         float thumbnailHeight = pageSize.getHeight() * Constants.THUMBNAIL_RATIO;
         if (!pdfView.getCacheManager().containsThumbnail(page, thumbnailRect)) {
-            pdfView.getRenderingHandler().addRenderingTask(page,
-                    thumbnailWidth, thumbnailHeight, thumbnailRect,
-                    true, 0, pdfView.isBestQuality(), pdfView.isAnnotationRendering());
+            pdfView.getRenderingHandler().addRenderingTask(page, thumbnailWidth, thumbnailHeight, thumbnailRect, true, 0, pdfView.isBestQuality(), pdfView.isAnnotationRendering());
         }
     }
 

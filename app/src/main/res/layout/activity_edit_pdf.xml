@@ -38,6 +38,16 @@
                 app:titleTextAppearance="@style/TextAppearance.Space.TitleSmall"
                 app:titleTextColor="@color/colorText">
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_save"
+                    style="@style/MaterialButtonTransparent"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:icon="@drawable/ic_action_edit_apply"
+                    app:iconPadding="@dimen/_0sdp"
+                    app:iconSize="@dimen/_20sdp" />
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -63,7 +73,7 @@
             android:id="@+id/drawingView"
             android:layout_width="@dimen/_0sdp"
             android:layout_height="@dimen/_0sdp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 
@@ -93,6 +103,7 @@
             style="@style/MaterialButtonTransparent"
             android:layout_width="@dimen/_0sdp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_0sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:singleLine="true"
             android:text="Highlight"
@@ -110,6 +121,7 @@
             style="@style/MaterialButtonTransparent"
             android:layout_width="@dimen/_0sdp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_0sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:singleLine="true"
             android:text="Underline"
@@ -127,6 +139,7 @@
             style="@style/MaterialButtonTransparent"
             android:layout_width="@dimen/_0sdp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_0sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:singleLine="true"
             android:text="Strikethrough"
@@ -144,6 +157,7 @@
             style="@style/MaterialButtonTransparent"
             android:layout_width="@dimen/_0sdp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_0sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:singleLine="true"
             android:text="Sign"
@@ -202,5 +216,44 @@
             app:layout_constraintTop_toTopOf="@+id/action_cancel"
             app:layout_constraintWidth_percent=".25" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_save"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_0sdp"
+        android:background="@color/colorBackground"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorSize="@dimen/_24sdp"
+            app:layout_constraintBottom_toTopOf="@+id/text_saving"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:trackThickness="@dimen/_2sdp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_saving"
+            style="@style/TextBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="Saving.."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_save" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

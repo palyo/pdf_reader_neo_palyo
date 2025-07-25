@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
-//    alias(libs.plugins.firebase.crashlitycs)
-//    alias(libs.plugins.gms.googleServices)
+    alias(libs.plugins.firebase.crashlitycs)
+    alias(libs.plugins.gms.googleServices)
 }
 
 android {
@@ -15,8 +15,8 @@ android {
         applicationId = "com.pdf.read.view.pdfreader.pdfviewer.pdfeditor"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "5.0"
 
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
@@ -67,7 +67,6 @@ android {
             force("org.bouncycastle:bcprov-jdk15to18:1.72")
         }
     }
-
     packagingOptions {
         exclude("META-INF/LICENSE.md")
         exclude("META-INF/NOTICE.md")
@@ -76,6 +75,12 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             excludes += "org/bouncycastle/x509/CertPathReviewerMessages_de.properties"
+        }
+    }
+
+    configurations {
+        implementation {
+            exclude(group = "com.squareup.okio", module = "okio")
         }
     }
 }
@@ -114,6 +119,14 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
 
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
+    implementation(libs.guava)
+    implementation(libs.gpuimage)
+
+    implementation(project(":smartcropper"))
     implementation(libs.jp.wasabeef.recyclerview.animators)
     implementation(libs.jp.wasabeef.glide.transformations)
 
@@ -130,9 +143,22 @@ dependencies {
     implementation(libs.poi.ooxml.schemas)
     implementation(libs.poi.scratchpad)
 
+    implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
     implementation(libs.pdfbox.android)
     implementation(libs.pdfium.android)
+    implementation(libs.itextg)
+    implementation("com.aspose:aspose-words:20.6:android.via.java")
+    implementation("com.aspose:aspose-cells:20.6:android.via.java")
 
     implementation("com.github.ome450901:SimpleRatingBar:1.5.1")
+
     implementation("com.google.android.gms:play-services-ads:23.6.0")
+
+    implementation("com.google.ads.mediation:applovin:13.3.1.1")
+    implementation("com.google.ads.mediation:inmobi:10.8.3.1")
+    implementation("com.google.ads.mediation:ironsource:8.10.0.0")
+    implementation("com.google.ads.mediation:vungle:7.5.0.1")
+    implementation("com.google.ads.mediation:facebook:6.20.0.0")
+    implementation("com.unity3d.ads:unity-ads:4.15.0")
+    implementation("com.google.ads.mediation:unity:4.15.1.0")
 }

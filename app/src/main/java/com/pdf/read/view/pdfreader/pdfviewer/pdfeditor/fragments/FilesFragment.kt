@@ -8,6 +8,7 @@ import androidx.core.content.*
 import androidx.recyclerview.widget.*
 import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
+import coder.apps.space.library.helper.TinyDB
 import com.google.android.material.progressindicator.*
 import com.google.android.material.textview.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
@@ -23,6 +24,7 @@ import kotlinx.coroutines.*
 import java.io.*
 
 class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::inflate) {
+
     private var documentViewModel: DocumentViewModel? = null
     private var commonAdapter: CommonAdapter? = null
     var firstEmissionHandled = false
@@ -48,8 +50,21 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
                 getString(R.string.tab_ppt) -> DocumentType.PPT
                 else -> DocumentType.ALL
             }
+            val tinyDB = TinyDB(this)
+            val selectedSort = tinyDB.getString(SORT_BY, SORT_MODIFIED)
+            val selectedOrder = tinyDB.getString(SORT_ORDER, SORT_DESCENDING)
             animationView.beVisible()
             documentViewModel?.getFilteredDocuments(documentType)?.observe(this@context) { documents ->
+                documents.sortWith(Comparator { file1, file2 ->
+                    val result = when (selectedSort) {
+                        SORT_MODIFIED -> file1.lastModified().compareTo(file2.lastModified())
+                        SORT_SIZE -> file1.length().compareTo(file2.length())
+                        else -> {
+                            file1.name.compareTo(file2.name, ignoreCase = true)
+                        }
+                    }
+                    if (selectedOrder == SORT_ASCENDING) result else -result
+                })
                 runOnUiThread {
                     if (!firstEmissionHandled && documents.isEmpty()) {
                         firstEmissionHandled = true
@@ -57,10 +72,12 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
                     }
                     if (documents.isNotEmpty()) {
                         commonAdapter?.addAll(files = documents)
+                        (parentFragment as HomeFragment).updateAd(true)
                         layoutEmpty.beGone()
                         recyclerView.beVisible()
                         animationView.beGone()
                     } else {
+                        (parentFragment as HomeFragment).updateAd(false)
                         layoutEmpty.beVisible()
                         recyclerView.beGone()
                         animationView.beGone()
@@ -93,11 +110,11 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
                         when (it) {
                             Option.FAVORITE -> {
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    val favorite = favoriteDao.isFavorite(file.absolutePath.toString())
+                                    val favorite = favoriteLikeDao.isFavorite(file.absolutePath.toString())
                                     if (favorite == null) {
-                                        favoriteDao.insert(Favorite(fullName = file.name, filePath = file.absolutePath.toString()))
+                                        favoriteLikeDao.insert(Favorite(fullName = file.name, filePath = file.absolutePath.toString()))
                                     } else {
-                                        favoriteDao.delete(favorite)
+                                        favoriteLikeDao.delete(favorite)
                                     }
                                 }
                             }
@@ -136,6 +153,7 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
                                             if (!isFinishing && !isDestroyed) {
                                                 dialog.dismiss()
                                                 commonAdapter?.removeItems(selected)
+                                                documentViewModel?.deleteFromCurrentList(selected)
                                             }
                                         }
                                     }
@@ -169,6 +187,7 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
     }
 
     companion object {
+
         fun newInstance(type: String) = FilesFragment().apply {
             arguments = Bundle().apply {
                 putString("type", type)

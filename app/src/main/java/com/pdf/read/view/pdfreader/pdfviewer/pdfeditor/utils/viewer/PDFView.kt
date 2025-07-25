@@ -72,7 +72,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
     private var debugPaint: Paint = Paint()
     var pageFitPolicy = FitPolicy.BOTH
         private set
-    var isFitEachPage = false
+    var isFitEachPage = true
         private set
     private var defaultPage = 0
     var isSwipeVertical = true
@@ -86,9 +86,9 @@ class PDFView(context: Context?, set: AttributeSet?) :
     var scrollHandle: ScrollHandle? = null
         private set
     private var isScrollHandleInit = false
-    var isBestQuality = false
+    var isBestQuality = true
         private set
-    var isAnnotationRendering = false
+    var isAnnotationRendering = true
         private set
     private var renderDuringScale = false
     var isAntialiasing = true
@@ -112,7 +112,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
     private var scope: CoroutineScope? = null
     private val annotationHandler = PdfAnnotationHandler(resources)
     private val pageDivisionPaint = Paint().apply {
-        this.color = Color.GRAY
+        this.color = Color.TRANSPARENT
         this.strokeWidth = 2f
         this.style = Style.STROKE
     }
@@ -735,7 +735,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
         }
         val bg = background
         if (bg == null) {
-            canvas.drawColor(if (nightMode) Color.BLACK else Color.WHITE)
+            canvas.drawColor(if (nightMode) Color.GRAY else Color.GRAY)
         } else {
             bg.draw(canvas)
         }
@@ -790,7 +790,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
         val size = pdfFile!!.getPageSize(part.page)
         if (isSwipeVertical) {
             localTranslationY = pdfFile!!.getPageOffsetWithZoom(part.page, zoom)
-            if (!isCache && part.page != 0) {
+            if (!isCache) {
                 canvas.drawLine(
                     0f,
                     localTranslationY,
@@ -847,7 +847,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
             return
         }
         // Cancel all current tasks
-        renderingHandler!!.removeMessages(RenderingHandler.MSG_RENDER_TASK)
+        renderingHandler?.removeMessages(RenderingHandler.MSG_RENDER_TASK)
         cacheManager?.makeANewSet()
         pagesLoader?.loadPages()
         redraw()
@@ -1324,17 +1324,18 @@ class PDFView(context: Context?, set: AttributeSet?) :
         private var onTapListener: OnTapListener? = null
         private var onLongPressListener: OnLongPressListener? = null
         private var onPageErrorListener: OnPageErrorListener? = null
+        private var onPageCompleteListener: OnLoadCompleteListener? = null
         private var linkHandler: LinkHandler = DefaultLinkHandler(this@PDFView)
         private var defaultPage = 0
         private var swipeHorizontal = false
-        private var annotationRendering = false
+        private var annotationRendering = true
         private var password: String? = null
         private var scrollHandle: ScrollHandle? = null
         private var antialiasing = true
         private var spacing = 0
         private var autoSpacing = false
-        private var pageFitPolicy = FitPolicy.WIDTH
-        private var fitEachPage = false
+        private var pageFitPolicy = FitPolicy.BOTH
+        private var fitEachPage = true
         private var pageFling = false
         private var pageSnap = false
         private var nightMode = false
@@ -1388,6 +1389,11 @@ class PDFView(context: Context?, set: AttributeSet?) :
 
         fun onPageError(onPageErrorListener: OnPageErrorListener?): Configurator {
             this.onPageErrorListener = onPageErrorListener
+            return this
+        }
+
+        fun onLoadComplete(onPageCompleteListener: OnLoadCompleteListener?): Configurator {
+            this.onPageCompleteListener = onPageCompleteListener
             return this
         }
 
@@ -1507,6 +1513,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
             callbacks.setOnTap(onTapListener)
             callbacks.setOnLongPress(onLongPressListener)
             callbacks.setOnPageError(onPageErrorListener)
+            callbacks.setOnLoadComplete(onPageCompleteListener)
             callbacks.setLinkHandler(linkHandler)
             isSwipeEnabled = enableSwipe
             setNightMode(nightMode)
@@ -1561,6 +1568,39 @@ class PDFView(context: Context?, set: AttributeSet?) :
         redraw()
     }
 
+    fun addHighlightExisting(highlight: HighlightModel) {
+        val coordinates = highlight.coordinates ?: return
+        // Get full bounding values
+        val left = coordinates.startX.toFloat()
+        val right = coordinates.endX.toFloat()
+        val fullTop = coordinates.startY.toFloat()
+        val fullBottom = coordinates.endY.toFloat()
+        // Calculate the vertical center
+        val centerY = (fullTop + fullBottom) / 2f
+        // Calculate full height of the original rectangle
+        val fullHeight = kotlin.math.abs(fullTop - fullBottom)
+        // Choose a reduced height (for example, 50% of the full height)
+        val newHeight = fullHeight * 0.5f
+        // Compute adjusted top and bottom so that the highlight is centered vertically
+        val adjustedTop = centerY + newHeight / 2f
+        val adjustedBottom = centerY - newHeight / 2f
+        // Build new coordinates for the highlight using the same left/right values
+        val adjustedCoordinates = Coordinates(
+            startX = left.toDouble(),
+            startY = adjustedTop.toDouble(),
+            endX = right.toDouble(),
+            endY = adjustedBottom.toDouble()
+        )
+        // Create start and end points from the adjusted coordinates.
+        // (You might need additional coordinate conversion depending on your view.)
+        val startPoint = PointF(adjustedCoordinates.startX.toFloat(), adjustedCoordinates.startY.toFloat())
+        val endPoint = PointF(adjustedCoordinates.endX.toFloat(), adjustedCoordinates.endY.toFloat())
+        val drawSegments = findDrawSegmentsOfAnnotation(pdfFile!!.getPageIndexFromPaginationIndex(highlight.paginationPageIndex), startPoint, endPoint)
+        highlight.charDrawSegments = drawSegments
+        annotationHandler.annotations.add(highlight)
+        redraw()
+    }
+
     fun findAllAnnotations(): ArrayList<PdfAnnotationModel> {
         return annotationHandler.annotations
     }
@@ -1575,10 +1615,76 @@ class PDFView(context: Context?, set: AttributeSet?) :
         redraw()
     }
 
+    fun addUnderlineExisting(note: UnderlineModel) {
+        val coordinates = note.coordinates ?: return
+        // Get full bounding values
+        val left = coordinates.startX.toFloat()
+        val right = coordinates.endX.toFloat()
+        val fullTop = coordinates.startY.toFloat()
+        val fullBottom = coordinates.endY.toFloat()
+        // Calculate the vertical center
+        val centerY = (fullTop + fullBottom) / 2f
+        // Calculate full height of the original rectangle
+        val fullHeight = kotlin.math.abs(fullTop - fullBottom)
+        // Choose a reduced height (for example, 50% of the full height)
+        val newHeight = fullHeight * 0.5f
+        // Compute adjusted top and bottom so that the highlight is centered vertically
+        val adjustedTop = centerY + newHeight / 2f
+        val adjustedBottom = centerY - newHeight / 2f
+        // Build new coordinates for the highlight using the same left/right values
+        val adjustedCoordinates = Coordinates(
+            startX = left.toDouble(),
+            startY = adjustedTop.toDouble(),
+            endX = right.toDouble(),
+            endY = adjustedBottom.toDouble()
+        )
+        // Create start and end points from the adjusted coordinates.
+        // (You might need additional coordinate conversion depending on your view.)
+        val startPoint = PointF(adjustedCoordinates.startX.toFloat(), adjustedCoordinates.startY.toFloat())
+        val endPoint = PointF(adjustedCoordinates.endX.toFloat(), adjustedCoordinates.endY.toFloat())
+        val drawSegments = findDrawSegmentsOfAnnotation(pdfFile!!.getPageIndexFromPaginationIndex(note.paginationPageIndex), startPoint, endPoint)
+        note.charDrawSegments = drawSegments
+        annotationHandler.annotations.add(note)
+        redraw()
+    }
+
     fun addStrikeThrough(strike: StrikeThroughModel) {
         val coordinates = strike.coordinates ?: return
         val startPoint = PointF(coordinates.startX.toFloat(), coordinates.startY.toFloat())
         val endPoint = PointF(coordinates.endX.toFloat(), coordinates.endY.toFloat())
+        val drawSegments = findDrawSegmentsOfAnnotation(pdfFile!!.getPageIndexFromPaginationIndex(strike.paginationPageIndex), startPoint, endPoint)
+        strike.charDrawSegments = drawSegments
+        annotationHandler.annotations.add(strike)
+        redraw()
+    }
+
+    fun addStrikeThroughExisting(strike: StrikeThroughModel) {
+        val coordinates = strike.coordinates ?: return
+        // Get full bounding values
+        val left = coordinates.startX.toFloat()
+        val right = coordinates.endX.toFloat()
+        val fullTop = coordinates.startY.toFloat()
+        val fullBottom = coordinates.endY.toFloat()
+        // Calculate the vertical center
+        val centerY = (fullTop + fullBottom) / 2f
+        // Calculate full height of the original rectangle
+        val fullHeight = kotlin.math.abs(fullTop - fullBottom)
+        // Choose a reduced height (for example, 50% of the full height)
+        val newHeight = fullHeight * 0.5f
+        // Compute adjusted top and bottom so that the highlight is centered vertically
+        val adjustedTop = centerY + newHeight / 2f
+        val adjustedBottom = centerY - newHeight / 2f
+        // Build new coordinates for the highlight using the same left/right values
+        val adjustedCoordinates = Coordinates(
+            startX = left.toDouble(),
+            startY = adjustedTop.toDouble(),
+            endX = right.toDouble(),
+            endY = adjustedBottom.toDouble()
+        )
+        // Create start and end points from the adjusted coordinates.
+        // (You might need additional coordinate conversion depending on your view.)
+        val startPoint = PointF(adjustedCoordinates.startX.toFloat(), adjustedCoordinates.startY.toFloat())
+        val endPoint = PointF(adjustedCoordinates.endX.toFloat(), adjustedCoordinates.endY.toFloat())
         val drawSegments = findDrawSegmentsOfAnnotation(pdfFile!!.getPageIndexFromPaginationIndex(strike.paginationPageIndex), startPoint, endPoint)
         strike.charDrawSegments = drawSegments
         annotationHandler.annotations.add(strike)
@@ -1607,7 +1713,7 @@ class PDFView(context: Context?, set: AttributeSet?) :
         }
     }
 
-    private fun findDrawSegmentsOfAnnotation(
+    fun findDrawSegmentsOfAnnotation(
         pageIndex: Int,
         startPoint: PointF,
         endPoint: PointF,

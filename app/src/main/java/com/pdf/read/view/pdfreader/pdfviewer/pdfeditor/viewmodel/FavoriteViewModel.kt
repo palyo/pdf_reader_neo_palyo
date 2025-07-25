@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.dao.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 
-class FavoriteViewModel(private val favoriteDao: FavoriteDao) : ViewModel() {
+class FavoriteViewModel(private val favoriteLikeDao: FavoriteLikeDao) : ViewModel() {
     private val _favorites = MediatorLiveData<MutableList<Favorite>>()
     val favorites: LiveData<MutableList<Favorite>> get() = _favorites
 
@@ -13,7 +13,7 @@ class FavoriteViewModel(private val favoriteDao: FavoriteDao) : ViewModel() {
     }
 
     private fun observeDatabase() {
-        _favorites.addSource(favoriteDao.fetchAll()) { favorite ->
+        _favorites.addSource(favoriteLikeDao.fetchAll()) { favorite ->
             val favorites = _favorites.value
             if (favorites == null || !areListsEqual(favorites, favorite)) {
                 _favorites.value = favorite.toMutableList()
@@ -29,11 +29,11 @@ class FavoriteViewModel(private val favoriteDao: FavoriteDao) : ViewModel() {
     }
 }
 
-class FavoriteViewModelFactory(private val favoriteDao: FavoriteDao) : ViewModelProvider.Factory {
+class FavoriteViewModelFactory(private val favoriteLikeDao: FavoriteLikeDao) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
-            return FavoriteViewModel(favoriteDao) as T
+            return FavoriteViewModel(favoriteLikeDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

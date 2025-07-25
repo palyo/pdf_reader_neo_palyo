@@ -5,7 +5,7 @@ import androidx.room.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 
 @Dao
-interface FavoriteDao {
+interface FavoriteLikeDao {
     @Query("SELECT * FROM favorite ORDER BY timestamp DESC")
     fun fetchAll(): LiveData<MutableList<Favorite>>
 

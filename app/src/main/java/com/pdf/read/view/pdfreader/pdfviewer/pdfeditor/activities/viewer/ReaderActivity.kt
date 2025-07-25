@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.activity.*
 import androidx.core.content.*
 import coder.apps.space.library.base.*
+import coder.apps.space.library.extension.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.R
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.*
@@ -50,7 +51,7 @@ class ReaderActivity : BaseActivity<ActivityReaderBinding>(ActivityReaderBinding
         layoutContainer.post {
             init()
             CoroutineScope(Dispatchers.IO).launch {
-                favorite = favoriteDao.isFavorite(filePath.toString())
+                favorite = favoriteLikeDao.isFavorite(filePath.toString())
                 isFavorite = favorite != null
                 launch(Dispatchers.Main) {
                     toolbar.menu.findItem(R.id.action_favorite).icon = ContextCompat.getDrawable(this@ReaderActivity, if (favorite != null) R.drawable.ic_navigation_favorite_active else R.drawable.ic_navigation_favorite_normal)
@@ -230,12 +231,12 @@ class ReaderActivity : BaseActivity<ActivityReaderBinding>(ActivityReaderBinding
                 CoroutineScope(Dispatchers.IO).launch {
                     if (favorite == null) {
                         isFavorite = true
-                        favoriteDao.insert(Favorite(fullName = fileName.toString(), filePath = filePath.toString()))
+                        favoriteLikeDao.insert(Favorite(fullName = fileName.toString(), filePath = filePath.toString()))
                     } else {
                         favorite?.let {
                             favorite = null
                             isFavorite = false
-                            favoriteDao.delete(it)
+                            favoriteLikeDao.delete(it)
                         }
                     }
                     launch(Dispatchers.Main) {

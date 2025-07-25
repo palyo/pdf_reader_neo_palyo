@@ -13,6 +13,7 @@ import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
 import coder.apps.space.library.helper.*
 import com.google.android.gms.ads.nativead.*
+import com.google.android.material.button.*
 import com.google.android.material.tabs.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.*
@@ -23,6 +24,7 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.pager.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.viewmodel.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+
     private var nativeAd: NativeAd? = null
     private var documentViewModel: DocumentViewModel? = null
     private var pager: FragmentTabPager? = null
@@ -68,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private var pagerListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            binding?.updateAd()
+            //binding?.updateAd()
         }
     }
 
@@ -88,35 +90,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 tab.text = pager?.tabs?.get(position) ?: ""
             }.attach()
             viewPager.registerOnPageChangeCallback(pagerListener)
-            updateAd()
+            //updateAd()
         }
     }
 
-    fun FragmentHomeBinding.updateAd() {
-        activity?.apply context@{
-            documentViewModel?.getFilteredDocuments(
-                when (pager?.tabs?.get(viewPager.currentItem)) {
-                    getString(R.string.tab_pdf) -> DocumentType.PDF
-                    getString(R.string.tab_doc) -> DocumentType.DOC
-                    getString(R.string.tab_xls) -> DocumentType.XLS
-                    getString(R.string.tab_ppt) -> DocumentType.PPT
-                    else -> DocumentType.ALL
-                }
-            )?.observe(this@context) { documents ->
-                runOnUiThread {
-                    if (documents.size > 0) {
-                        if (nativeAd == null) {
-                            activity?.viewNativeBanner(adNative) { nativeAd: NativeAd? ->
-                                this@HomeFragment.nativeAd = nativeAd
-                            }
-                        } else {
-                            nativeAd?.let { activity?.viewPopulateNativeBanner(it, adNative) }
-                        }
-                    } else {
-                        activity?.viewLoadingBanner(adNative)
+    fun updateAd(b: Boolean) {
+        binding?.apply {
+            if (b) {
+                if (nativeAd == null) {
+                    activity?.viewNativeBanner(adNative) { nativeAd: NativeAd? ->
+                        this@HomeFragment.nativeAd = nativeAd
                     }
+                } else {
+                    nativeAd?.let { activity?.viewPopulateNativeBanner(it, adNative) }
                 }
+            } else {
+                activity?.viewLoadingBanner(adNative)
             }
+            //updateSort()
         }
     }
 
@@ -127,6 +118,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     initPermissions()
                 }
             }
+            requireActivity().findViewById<MaterialButton>(R.id.button_sort).setOnClickListener {
+                viewSortDialog {
+                    updateSort()
+                }
+            }
+        }
+    }
+
+    private fun updateSort() {
+        activity?.apply {
+            val tinyDB = TinyDB(this)
+            val selectedSort = tinyDB.getString(SORT_BY, SORT_MODIFIED)
+            val selectedOrder = tinyDB.getString(SORT_ORDER, SORT_DESCENDING)
+            documentViewModel?.setSorting(
+                when (selectedSort) {
+                    SORT_MODIFIED -> SortBy.DATE_MODIFIED
+                    SORT_NAME -> SortBy.NAME
+                    else -> SortBy.SIZE
+                }, when (selectedOrder) {
+                SORT_ASCENDING -> SortOrder.ASCENDING
+                else -> SortOrder.DESCENDING
+            }
+            )
         }
     }
 
@@ -185,12 +199,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     companion object {
+
         fun newInstance() = HomeFragment().apply {
             arguments = Bundle().apply {}
         }
     }
 
     class HandleSettingPreview internal constructor(context: HomeFragment) : LeakGuardHandlerWrapper<HomeFragment>(context) {
+
         fun cancelPollingImeSettings() {
             removeMessages(0)
         }

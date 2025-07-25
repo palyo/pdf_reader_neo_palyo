@@ -74,11 +74,11 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
                         when (it) {
                             Option.FAVORITE -> {
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    val favorite = favoriteDao.isFavorite(file.absolutePath.toString())
+                                    val favorite = favoriteLikeDao.isFavorite(file.absolutePath.toString())
                                     if (favorite == null) {
-                                        favoriteDao.insert(Favorite(fullName = file.name, filePath = file.absolutePath.toString()))
+                                        favoriteLikeDao.insert(Favorite(fullName = file.name, filePath = file.absolutePath.toString()))
                                     } else {
-                                        favoriteDao.delete(favorite)
+                                        favoriteLikeDao.delete(favorite)
                                     }
                                 }
                             }
@@ -142,7 +142,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
 
     override fun create() {
         activity?.apply {
-            dataViewModel = ViewModelProvider(this, FavoriteViewModelFactory(favoriteDao = favoriteDao))[FavoriteViewModel::class.java]
+            dataViewModel = ViewModelProvider(this, FavoriteViewModelFactory(favoriteLikeDao = favoriteLikeDao))[FavoriteViewModel::class.java]
         }
     }
 

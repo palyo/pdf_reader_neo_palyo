@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -40,6 +45,39 @@
         android:theme="@style/Theme.PdfReaderNeo"
         android:usesCleartextTraffic="true"
         tools:targetApi="UPSIDE_DOWN_CAKE">
+        <activity
+            android:name=".activities.tools.modify.SplitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.modify.MergeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.modify.CompressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.scanner.ViewScannedDocumentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.scanner.ListDocScannedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.scanner.EditScannedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.picker.SelectFileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.converter.TextToPdfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.converter.ExcelToPdfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.converter.WordToPdfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.tools.converter.ImageToPdfActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.AppBoardingActivity"
             android:exported="false" />
