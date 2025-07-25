@@ -1,0 +1,17 @@
+[
+{
+  "directory": "D:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/.cxx/RelWithDebInfo/6m6vm1xf/armeabi-v7a",
+  "command": "D:\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi26 --sysroot=D:/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/opencv/include -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\Scanner.cpp.o -c D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\Scanner.cpp",
+  "file": "D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\Scanner.cpp"
+},
+{
+  "directory": "D:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/.cxx/RelWithDebInfo/6m6vm1xf/armeabi-v7a",
+  "command": "D:\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi26 --sysroot=D:/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/opencv/include -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\android_utils.cpp.o -c D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\android_utils.cpp",
+  "file": "D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\android_utils.cpp"
+},
+{
+  "directory": "D:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/.cxx/RelWithDebInfo/6m6vm1xf/armeabi-v7a",
+  "command": "D:\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi26 --sysroot=D:/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/opencv/include -ID:/HontedSpace/JugnuSpace/PdfReaderNeo/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\smart_cropper.cpp.o -c D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\smart_cropper.cpp",
+  "file": "D:\\HontedSpace\\JugnuSpace\\PdfReaderNeo\\smartcropper\\src\\main\\cpp\\smart_cropper.cpp"
+}
+]

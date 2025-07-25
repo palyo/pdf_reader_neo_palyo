@@ -1,0 +1,1 @@
+D:\HontedSpace\Kotlin\FileTools\smartcropper\CMakeLists.txt

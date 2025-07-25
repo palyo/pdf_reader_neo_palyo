@@ -1,0 +1,17 @@
+[
+{
+  "directory": "D:/HontedSpace/Kotlin/FileTools/smartcropper/.cxx/RelWithDebInfo/6k1i3d5e/arm64-v8a",
+  "command": "D:\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=D:/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/Kotlin/FileTools/smartcropper/opencv/include -ID:/HontedSpace/Kotlin/FileTools/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\Scanner.cpp.o -c D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\Scanner.cpp",
+  "file": "D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\Scanner.cpp"
+},
+{
+  "directory": "D:/HontedSpace/Kotlin/FileTools/smartcropper/.cxx/RelWithDebInfo/6k1i3d5e/arm64-v8a",
+  "command": "D:\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=D:/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/Kotlin/FileTools/smartcropper/opencv/include -ID:/HontedSpace/Kotlin/FileTools/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\android_utils.cpp.o -c D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\android_utils.cpp",
+  "file": "D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\android_utils.cpp"
+},
+{
+  "directory": "D:/HontedSpace/Kotlin/FileTools/smartcropper/.cxx/RelWithDebInfo/6k1i3d5e/arm64-v8a",
+  "command": "D:\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=D:/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dsmart_cropper_EXPORTS -ID:/HontedSpace/Kotlin/FileTools/smartcropper/opencv/include -ID:/HontedSpace/Kotlin/FileTools/smartcropper/src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\smart_cropper.dir\\src\\main\\cpp\\smart_cropper.cpp.o -c D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\smart_cropper.cpp",
+  "file": "D:\\HontedSpace\\Kotlin\\FileTools\\smartcropper\\src\\main\\cpp\\smart_cropper.cpp"
+}
+]
