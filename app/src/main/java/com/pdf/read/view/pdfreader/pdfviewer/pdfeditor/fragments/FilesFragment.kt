@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.*
 import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
 import coder.apps.space.library.helper.TinyDB
+import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.material.progressindicator.*
 import com.google.android.material.textview.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.adapter.*
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.NativeAdHolder
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
@@ -84,6 +86,10 @@ class FilesFragment : BaseFragment<FragmentFilesBinding>(FragmentFilesBinding::i
                     }
                 }
             }
+        }
+
+        NativeAdHolder.adLiveData.observe(viewLifecycleOwner) { ad ->
+            ad?.let { commonAdapter?.updateNativeAd(it) }
         }
     }
 

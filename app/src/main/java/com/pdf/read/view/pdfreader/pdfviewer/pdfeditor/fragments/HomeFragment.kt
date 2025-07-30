@@ -30,32 +30,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private var pager: FragmentTabPager? = null
     private var handlerSetting: HandleSettingPreview? = null
     private var permissionFlow: Int = -1
-    private var managePermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+    private var managePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                activity?.apply {
+                    if (isPermissionAllowed()) {
+                        appOpenCount += 1
+                        binding?.setupViewPager()
+                        documentViewModel = DocumentViewModel.getInstance(application)
+                        documentViewModel?.loadPreload()
+                        return@registerForActivityResult
+                    }
+                    binding?.layoutPermission?.root?.beVisibleIf(!isPermissionAllowed())
+                }
+            }
+        }
+    private var storagePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             activity?.apply {
                 if (isPermissionAllowed()) {
-                    appOpenCount += 1
                     binding?.setupViewPager()
                     documentViewModel = DocumentViewModel.getInstance(application)
                     documentViewModel?.loadPreload()
                     return@registerForActivityResult
                 }
+
                 binding?.layoutPermission?.root?.beVisibleIf(!isPermissionAllowed())
             }
         }
-    }
-    private var storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        activity?.apply {
-            if (isPermissionAllowed()) {
-                binding?.setupViewPager()
-                documentViewModel = DocumentViewModel.getInstance(application)
-                documentViewModel?.loadPreload()
-                return@registerForActivityResult
-            }
-
-            binding?.layoutPermission?.root?.beVisibleIf(!isPermissionAllowed())
-        }
-    }
 
     override fun FragmentHomeBinding.viewCreated() {
         activity?.apply {
@@ -70,7 +72,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private var pagerListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            //binding?.updateAd()
         }
     }
 
@@ -90,24 +91,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 tab.text = pager?.tabs?.get(position) ?: ""
             }.attach()
             viewPager.registerOnPageChangeCallback(pagerListener)
-            //updateAd()
         }
     }
 
     fun updateAd(b: Boolean) {
-        binding?.apply {
-            if (b) {
+        if (b) {
+            binding?.apply {
                 if (nativeAd == null) {
-                    activity?.viewNativeBanner(adNative) { nativeAd: NativeAd? ->
-                        this@HomeFragment.nativeAd = nativeAd
+                    activity?.viewNativeBanner(adNative) { loadedAd ->
+                        nativeAd = loadedAd
+                        FragmentTabPager.sharedNativeAd = loadedAd
+                        NativeAdHolder.adLiveData.postValue(loadedAd)
                     }
                 } else {
-                    nativeAd?.let { activity?.viewPopulateNativeBanner(it, adNative) }
+                    activity?.viewPopulateNativeBanner(nativeAd!!, adNative)
+                    NativeAdHolder.adLiveData.postValue(nativeAd)
                 }
-            } else {
+            }
+        } else {
+            binding?.apply {
                 activity?.viewLoadingBanner(adNative)
             }
-            //updateSort()
         }
     }
 
@@ -137,9 +141,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     SORT_NAME -> SortBy.NAME
                     else -> SortBy.SIZE
                 }, when (selectedOrder) {
-                SORT_ASCENDING -> SortOrder.ASCENDING
-                else -> SortOrder.DESCENDING
-            }
+                    SORT_ASCENDING -> SortOrder.ASCENDING
+                    else -> SortOrder.DESCENDING
+                }
             )
         }
     }
@@ -205,7 +209,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    class HandleSettingPreview internal constructor(context: HomeFragment) : LeakGuardHandlerWrapper<HomeFragment>(context) {
+    class HandleSettingPreview internal constructor(context: HomeFragment) :
+        LeakGuardHandlerWrapper<HomeFragment>(context) {
 
         fun cancelPollingImeSettings() {
             removeMessages(0)
