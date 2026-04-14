@@ -12,6 +12,7 @@ import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.App.Companion.isOpenInter
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.R
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.tools.scanner.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
@@ -30,6 +31,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             appOpenCount += 1
         }
         viewCollapsibleBanner(adBanner)
+        loadRewardAd()
     }
 
     private fun ActivityHomeBinding.setupNavigation() {
@@ -129,6 +131,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 isCancelable = true
                 show(supportFragmentManager.beginTransaction(), SettingsDialogFragment::class.java.simpleName)
             }
+        }
+        scanPdf.setOnClickListener{
+            go(ListDocScannedActivity::class.java)
         }
         buttonSearch.setOnClickListener {
             FindFiles.newInstance { file ->

@@ -112,6 +112,36 @@ fun Activity.showProgressDialog(): Dialog {
     return dialog
 }
 
+fun Activity.showPremiumContentDialog(watchAd: () -> Unit, premium: () -> Unit) {
+    val dialog = Dialog(this@showPremiumContentDialog, R.style.Theme_Space_Dialog)
+    val bind = LayoutRewardDialogBinding.inflate(layoutInflater)
+    dialog.setContentView(bind.root)
+    dialog.apply {
+        val params = window?.attributes
+        params?.width = WindowManager.LayoutParams.MATCH_PARENT
+        params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+        params?.gravity = Gravity.CENTER
+        window?.attributes = params
+        window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        window?.setDimAmount(.34f)
+        window?.navigationBarColor = ContextCompat.getColor(context, R.color.colorBlack)
+        window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+    }
+    bind.apply {
+        actionWatchAd.setOnClickListener {
+            dialog.dismiss()
+            watchAd.invoke()
+        }
+        actionPremium.setOnClickListener {
+            dialog.dismiss()
+            premium.invoke()
+        }
+    }
+
+    if (!isFinishing) dialog.show()
+}
+
 fun Activity.showOtherPermissionDialog(listener: () -> Unit?) {
     val dialog = Dialog(this@showOtherPermissionDialog, R.style.Theme_Space_Dialog)
     val bind = LayoutDialogCameraPermissionBinding.inflate(layoutInflater)

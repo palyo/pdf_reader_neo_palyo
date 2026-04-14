@@ -11,11 +11,12 @@ private var admobInterstitialAd: InterstitialAd? = null
 private var isLoadingAd = false
 
 fun Context.loadInterAd(listener: ((result: Boolean) -> Unit)? = null) {
-    if (isLoadingAd) return
+    if (isLoadingAd && isPremium) return
 
     isLoadingAd = true
     val adRequest = AdRequest.Builder().build()
-    InterstitialAd.load(this, INTER_ID, adRequest,
+    InterstitialAd.load(
+        this, INTER_ID, adRequest,
         object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 isLoadingAd = false
@@ -62,7 +63,9 @@ private fun Activity.displayInter(listener: ((result: Boolean) -> Unit)? = null)
 }
 
 fun Activity.viewInterAdForce(listener: ((result: Boolean) -> Unit)? = null) {
-    if (admobInterstitialAd != null) {
+    if (isPremium) {
+        listener?.invoke(true)
+    } else if (admobInterstitialAd != null) {
         displayInter(listener)
     } else {
         loadInterAd()
@@ -87,54 +90,14 @@ fun Activity.viewInterAdForce(listener: ((result: Boolean) -> Unit)? = null) {
 }
 
 fun Activity.viewInterAd(listener: ((result: Boolean) -> Unit)? = null) {
-    if (admobInterstitialAd != null) {
+    if (isPremium) {
+        listener?.invoke(true)
+    } else if (admobInterstitialAd != null) {
         displayInter(listener)
     } else if (!isLoadingAd) {
         listener?.invoke(true)
         loadInterAd()
     } else {
         listener?.invoke(true)
-    }
-}
-
-fun Activity.viewInterAdWait(listener: ((result: Boolean) -> Unit)? = null) {
-    val dialog = showProgressDialog(this)
-    if (admobInterstitialAd != null) {
-        Handler(mainLooper).postDelayed({
-            displayInter(listener)
-            Handler(mainLooper).postDelayed({
-                try {
-                    if (!isFinishing && !isDestroyed && dialog.isShowing) {
-                        dialog.dismiss()
-                    }
-                } catch (_: Exception) {
-                }
-            }, 1000)
-        }, 2000)
-    } else {
-        loadInterAd()
-        object : CountDownTimer((5 * 1000).toLong(), 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                if (admobInterstitialAd != null) {
-                    this.cancel()
-                    this.onFinish()
-                }
-            }
-
-            override fun onFinish() {
-                try {
-                    if (!isFinishing && !isDestroyed && dialog.isShowing) {
-                        dialog.dismiss()
-                    }
-                } catch (_: Exception) {
-                }
-                if (admobInterstitialAd != null) {
-                    displayInter(listener)
-                } else {
-                    listener?.invoke(true)
-                    loadInterAd()
-                }
-            }
-        }.start()
     }
 }

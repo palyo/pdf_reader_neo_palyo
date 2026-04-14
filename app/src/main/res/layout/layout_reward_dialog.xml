@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_20sdp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_view"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_reward_dialog_bg" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextExtraBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_56sdp"
+        android:gravity="center_vertical"
+        android:text="This tool is part of\nour premium features."
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/action_watch_ad"
+        android:layout_marginVertical="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_reward_dialog_vector" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextMedium"
+            android:layout_width="@dimen/_0sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24sdp"
+            android:gravity="center"
+            android:text="Watch a short ad or upgrade to Pro to unlock it instantly."
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_watch_ad"
+        style="@style/MaterialButtonAccent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:text="Watch Ad"
+        android:textSize="@dimen/_10sdp"
+        app:backgroundTint="@color/colorBlack"
+        app:cornerRadius="@dimen/_12sdp"
+        app:icon="@drawable/ic_icon_video_ad"
+        app:iconGravity="textEnd"
+        app:fontFamily="@font/semi_bold"
+        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintEnd_toStartOf="@+id/action_premium"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_premium"
+        style="@style/MaterialButtonAccent"
+        android:layout_width="@dimen/_0sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:text="Go Premium"
+        android:textSize="@dimen/_11sdp"
+        app:backgroundTint="@color/colorRed"
+        app:cornerRadius="@dimen/_12sdp"
+        app:fontFamily="@font/semi_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/action_watch_ad"
+        app:layout_constraintTop_toTopOf="@id/action_watch_ad"
+        app:strokeWidth="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

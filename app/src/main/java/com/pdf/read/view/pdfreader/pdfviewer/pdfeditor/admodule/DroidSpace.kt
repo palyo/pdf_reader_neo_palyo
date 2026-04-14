@@ -11,6 +11,7 @@ var OPEN_ID = "ca-app-pub-3940256099942544/9257395921"
 var INTER_ID = "ca-app-pub-3940256099942544/1033173712"
 var NATIVE_ID = "ca-app-pub-3940256099942544/2247696110"
 var BANNER_ID = "ca-app-pub-3940256099942544/9214589741"
+var REWARD_AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"
 var Context.appOpenCount: Int
     get() = TinyDB(this).getInt("appOpenCount", 0)
     set(value) {
@@ -74,6 +75,7 @@ fun Activity.initAds(appJson: ConfigJson) {
     INTER_ID = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/1033173712" else appJson.interId ?: "ca-app-pub-3940256099942544/1033173712"
     OPEN_ID = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/9257395921" else appJson.openId ?: "ca-app-pub-3940256099942544/9257395921"
     BANNER_ID = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/9214589741" else appJson.bannerId ?: "ca-app-pub-3940256099942544/9214589741"
+    REWARD_AD_UNIT_ID = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/5224354917" else appJson.rewardId ?: "ca-app-pub-3940256099942544/5224354917"
     registerAppId(appJson.appId ?: "ca-app-pub-3940256099942544~3347511713")
 }
 
@@ -85,3 +87,11 @@ fun Activity.registerAppId(appId: String) {
     } catch (e: NullPointerException) {
     }
 }
+
+var Context.isPremium: Boolean
+    get() {
+        return TinyDB(this).getBoolean("isPremium", false)
+    }
+    set(value) {
+        TinyDB(this).putBoolean("isPremium", value)
+    }

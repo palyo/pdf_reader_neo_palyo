@@ -21,46 +21,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/scan_pdf"
-        android:layout_width="@dimen/_0sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintEnd_toStartOf="@+id/image_to_pdf"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_convert">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/icon_scan_pdf"
-            android:layout_width="@dimen/_0sdp"
-            android:layout_height="@dimen/_48sdp"
-            app:contentPadding="@dimen/_8sdp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:background="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-            app:srcCompat="@drawable/ic_icon_file_pdf" />
-
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/TextSemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_scan_pdf"
-            android:textSize="@dimen/_9ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_scan_pdf" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/image_to_pdf"
         android:layout_width="@dimen/_0sdp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/word_to_pdf"
-        app:layout_constraintStart_toEndOf="@+id/scan_pdf"
-        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_convert"
+        app:layout_constraintEnd_toStartOf="@+id/word_to_pdf">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon_image_to_pdf"
@@ -91,7 +58,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/excel_to_pdf"
         app:layout_constraintStart_toEndOf="@+id/image_to_pdf"
-        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+        app:layout_constraintTop_toTopOf="@+id/image_to_pdf">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon_word_to_pdf"
@@ -120,9 +87,9 @@
         android:id="@+id/excel_to_pdf"
         android:layout_width="@dimen/_0sdp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/text_to_pdf"
         app:layout_constraintStart_toEndOf="@+id/word_to_pdf"
-        app:layout_constraintTop_toTopOf="@+id/scan_pdf">
+        app:layout_constraintTop_toTopOf="@+id/image_to_pdf">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon_excel_to_pdf"
@@ -150,11 +117,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/text_to_pdf"
         android:layout_width="@dimen/_0sdp"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/image_to_pdf"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan_pdf">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/excel_to_pdf"
+        app:layout_constraintTop_toTopOf="@+id/image_to_pdf">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon_text_to_pdf"

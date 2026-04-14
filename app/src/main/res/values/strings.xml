@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Pdf Reader - Pdf Viewer</string>
-    <string name="app_name_title" translatable="false">Pdf Reader &amp; Viewer</string>
+    <string name="app_name" translatable="false">PDF Viewer - Scan &amp; Convert</string>
+    <string name="app_name_title" translatable="false">PDF Viewer - Scan &amp; Convert</string>
 
     <string name="title_sheet_permission">Permission Required</string>
     <string name="body_sheet_storage_permission">To read and edit files on your device, please allow to access all your files.</string>

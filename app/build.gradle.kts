@@ -15,8 +15,8 @@ android {
         applicationId = "com.pdf.read.view.pdfreader.pdfviewer.pdfeditor"
         minSdk = 26
         targetSdk = 35
-        versionCode = 5
-        versionName = "5.0"
+        versionCode = 9
+        versionName = "9.0"
 
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
@@ -161,4 +161,6 @@ dependencies {
     implementation("com.google.ads.mediation:facebook:6.20.0.0")
     implementation("com.unity3d.ads:unity-ads:4.15.0")
     implementation("com.google.ads.mediation:unity:4.15.1.0")
+
+    implementation("com.github.akshaaatt:Google-IAP:1.8.0")
 }

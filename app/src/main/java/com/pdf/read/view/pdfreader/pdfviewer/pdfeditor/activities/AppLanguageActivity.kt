@@ -37,7 +37,7 @@ class AppLanguageActivity : BaseActivity<ActivityAppLanguageBinding>(ActivityApp
                 go(HomeActivity::class.java, finish = true)
             } else {
                 tinyDB?.putBoolean(IS_LANGUAGE_ENABLED, false)
-                if (isStartFlowRepeat() || tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true) {
+                if (isStartFlowRepeat() || tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true && !isPremium) {
                     go(AppBoardingActivity::class.java, finish = true)
                 }
             }

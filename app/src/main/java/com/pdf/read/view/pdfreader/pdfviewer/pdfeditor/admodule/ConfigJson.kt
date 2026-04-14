@@ -31,6 +31,9 @@ data class ConfigJson(
     @field:SerializedName("banner")
     val bannerId: String? = null,
 
+    @field:SerializedName("reward")
+    val rewardId: String? = null,
+
     @field:SerializedName("is_start_flow_repeat")
     val isStartFlowRepeat: Boolean? = null
 ) : Parcelable

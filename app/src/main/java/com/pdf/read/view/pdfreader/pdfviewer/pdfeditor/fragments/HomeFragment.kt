@@ -6,6 +6,7 @@ import android.content.*
 import android.net.*
 import android.os.*
 import android.provider.*
+import android.util.*
 import androidx.activity.result.contract.*
 import androidx.annotation.*
 import androidx.viewpager2.widget.*
@@ -69,14 +70,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private var pagerListener = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-        }
-    }
-
     private fun FragmentHomeBinding.setupViewPager() {
         viewPager.apply {
+            updateAd(true)
             pager = FragmentTabPager(childFragmentManager, lifecycle)
             adapter = pager
             pager?.addTabs(mutableListOf<String>().apply {
@@ -90,28 +86,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = pager?.tabs?.get(position) ?: ""
             }.attach()
-            viewPager.registerOnPageChangeCallback(pagerListener)
         }
     }
 
-    fun updateAd(b: Boolean) {
-        if (b) {
-            binding?.apply {
-                if (nativeAd == null) {
-                    activity?.viewNativeBanner(adNative) { loadedAd ->
-                        nativeAd = loadedAd
-                        FragmentTabPager.sharedNativeAd = loadedAd
-                        NativeAdHolder.adLiveData.postValue(loadedAd)
-                    }
-                } else {
-                    activity?.viewPopulateNativeBanner(nativeAd!!, adNative)
-                    NativeAdHolder.adLiveData.postValue(nativeAd)
+    fun updateAd(showNative: Boolean) {
+        val act = activity
+        val bind = binding
+
+        if (act?.isPremium == true || bind == null) return
+
+        if (showNative) {
+            if (nativeAd == null) {
+                act?.loadNativeBanner { loadedAd ->
+                    nativeAd = loadedAd
+                    NativeAdHolder.adLiveData.postValue(loadedAd)
                 }
+            } else {
+                NativeAdHolder.adLiveData.postValue(nativeAd)
             }
         } else {
-            binding?.apply {
-                activity?.viewLoadingBanner(adNative)
-            }
+            act?.viewLoadingBanner(bind.adNative)
         }
     }
 
@@ -141,9 +135,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     SORT_NAME -> SortBy.NAME
                     else -> SortBy.SIZE
                 }, when (selectedOrder) {
-                    SORT_ASCENDING -> SortOrder.ASCENDING
-                    else -> SortOrder.DESCENDING
-                }
+                SORT_ASCENDING -> SortOrder.ASCENDING
+                else -> SortOrder.DESCENDING
+            }
             )
         }
     }

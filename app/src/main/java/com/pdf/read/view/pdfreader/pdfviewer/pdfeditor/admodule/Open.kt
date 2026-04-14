@@ -1,12 +1,17 @@
 package com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule
 
 import android.app.*
+import android.content.Context
 import android.graphics.drawable.*
 import android.view.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.App.Companion.appOpenManager
 
-fun viewAppOpen(isWait: Boolean = false, isDialogShown: Boolean = false, listener: (() -> Unit)?) {
+fun Context.viewAppOpen(isWait: Boolean = false, isDialogShown: Boolean = false, listener: (() -> Unit)?) {
+    if (isPremium) {
+        listener?.invoke()
+        return
+    }
     appOpenManager?.showAdIfAvailable(isWait = isWait, isDialogShown = isDialogShown) {
         if (it) {
             listener?.invoke()

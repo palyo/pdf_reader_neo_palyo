@@ -4,10 +4,15 @@ import android.app.*
 import android.os.*
 import android.util.*
 import android.view.*
+import coder.apps.space.library.extension.*
 import com.google.android.gms.ads.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 
 fun Activity.viewBanner(container: ViewGroup) {
+    if (isPremium) {
+        container.beGone()
+        return
+    }
     if (container.childCount > 0) container.removeAllViews()
     val adSize = getAdSize()
     val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (adSize.height + 2).toFloat(), resources.displayMetrics).toInt()
@@ -36,6 +41,10 @@ fun Activity.viewBanner(container: ViewGroup) {
 }
 
 fun Activity.viewCollapsibleBanner(container: ViewGroup) {
+    if (isPremium) {
+        container.beGone()
+        return
+    }
     if (container.childCount > 0) container.removeAllViews()
     val adSize = getAdSize()
     val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (adSize.height + 2).toFloat(), resources.displayMetrics).toInt()

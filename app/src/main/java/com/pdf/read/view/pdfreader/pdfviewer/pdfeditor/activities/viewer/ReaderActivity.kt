@@ -98,7 +98,7 @@ class ReaderActivity : BaseActivity<ActivityReaderBinding>(ActivityReaderBinding
 
     fun proceedToNextLevel() {
         currentAdLevel++
-        if (currentAdLevel % 2 == 0) {
+        if (currentAdLevel % 2 == 1) {
             viewInterAd {
                 finish()
             }

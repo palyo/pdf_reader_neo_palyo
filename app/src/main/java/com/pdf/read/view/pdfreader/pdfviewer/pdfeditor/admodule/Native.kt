@@ -3,6 +3,7 @@ package com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule
 import android.content.*
 import android.view.*
 import android.widget.*
+import coder.apps.space.library.extension.*
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.nativead.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.PreloadNewNative.fetchNativePreloadAd
@@ -26,28 +27,15 @@ fun Context.viewPopulateNativeBanner(nativeAd: NativeAd, container: ViewGroup) {
     container.addView(binding.root)
 }
 
-fun Context.viewNativeBanner(container: ViewGroup, listener: ((NativeAd?) -> Unit)? = null) {
-    container.removeAllViews()
-
+fun Context.loadNativeBanner(listener: ((NativeAd?) -> Unit)? = null) {
     if (isNativePreloadAvailable("NATIVE_ALL", mutableListOf(NATIVE_ID))) {
-        val layoutInflater: LayoutInflater = LayoutInflater.from(this)
-        val binding = AdUnifiedBannerBinding.inflate(layoutInflater)
         val nativeAd = fetchNativePreloadAd("NATIVE_ALL", mutableListOf(NATIVE_ID))
-        populateAdViewBanner(nativeAd, binding)
-        container.removeAllViews()
-        container.addView(binding.root)
         listener?.invoke(nativeAd)
         return
     }
 
-    viewLoadingBanner(container)
     val adLoader = AdLoader.Builder(this, NATIVE_ID)
         .forNativeAd { nativeAd: NativeAd ->
-            val layoutInflater: LayoutInflater = LayoutInflater.from(this@viewNativeBanner)
-            val binding = AdUnifiedBannerBinding.inflate(layoutInflater)
-            populateAdViewBanner(nativeAd, binding)
-            container.removeAllViews()
-            container.addView(binding.root)
             listener?.invoke(nativeAd)
         }
         .withNativeAdOptions(NativeAdOptions.Builder().setAdChoicesPlacement(NativeAdOptions.ADCHOICES_TOP_RIGHT).build()).build()
@@ -90,8 +78,11 @@ fun populateAdViewBanner(unifiedNativeAd: NativeAd?, binding: AdUnifiedBannerBin
 }
 
 fun Context.viewNativeSmall(container: ViewGroup) {
+    if (isPremium) {
+        container.beGone()
+        return
+    }
     container.removeAllViews()
-
     if (isNativePreloadAvailable("NATIVE_ALL", mutableListOf(NATIVE_ID))) {
         val layoutInflater: LayoutInflater = LayoutInflater.from(this)
         val binding = AdUnifiedSmallBinding.inflate(layoutInflater)
@@ -157,8 +148,11 @@ fun populateAdViewSmall(unifiedNativeAd: NativeAd?, binding: AdUnifiedSmallBindi
 }
 
 fun Context.viewNativeMedium(container: ViewGroup) {
+    if (isPremium) {
+        container.beGone()
+        return
+    }
     container.removeAllViews()
-
     if (isNativePreloadAvailable("NATIVE_ALL", mutableListOf(NATIVE_ID))) {
         val layoutInflater: LayoutInflater = LayoutInflater.from(this)
         val binding = AdUnifiedMediumBinding.inflate(layoutInflater)

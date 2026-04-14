@@ -4,9 +4,11 @@ import android.app.*
 import android.content.*
 import android.net.*
 import android.os.*
+import android.util.*
 import androidx.activity.*
 import coder.apps.space.library.base.*
 import coder.apps.space.library.extension.*
+import com.limurse.iap.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.App.Companion.appOpenManager
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.PreloadNewNative.loadNativeAd
@@ -16,17 +18,40 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.viewmodel.*
 import java.util.concurrent.atomic.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+
     private var consentManager: ConsentManager? = null
     private val isMobileAdsInitializeCalled = AtomicBoolean(false)
     override fun ActivityMainBinding.initExtra() {
         if (isPermissionAllowed()) {
             DocumentViewModel.getInstance(application).loadPreload()
         }
+        isPremium = false
+        //val iapConnector = IapConnector(
+        //    context = this@MainActivity,
+        //    nonConsumableKeys = listOf("subscription_lifetime"),
+        //    consumableKeys = arrayListOf(),
+        //    subscriptionKeys = arrayListOf(),
+        //    key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoU2V+jOBlz47MMp2UIxn6ji0kgRJw0AGdGX5K7nBcWh/869RufxLnqo+RpuLFLgMHcVlcRW2d8vLDq6zzlt3iTvrqbThswBI1IlkZ22ot+UTV2RP4no4jJF7eqcJSPwoKIM6L8t1aLa2rvlwI8K58G5x03tvpNQHp4sD8SLWFKrhXFuET9CCMIiSr4FKoo0YWtK1yprMOu3s+ddKjp/iWYNv3iX5SU7FhJ1uXuxIeZShX7Ulgy7Oji+ACJfoQgYU6xpODoCA7ymEtih4SI3Tojzwg2nMfMvGH3KzUC2Uizd9UAg19PN9H4WHQVjKlRlzGRBR791a3ufDil9vYMl8UwIDAQAB",
+        //    enableLogging = true
+        //)
+        //iapConnector.addPurchaseListener(object : PurchaseServiceListener {
+        //    override fun onPricesUpdated(iapKeyPrices: Map<String, DataWrappers.ProductDetails>) {}
+        //    override fun onProductPurchased(purchaseInfo: DataWrappers.PurchaseInfo) {}
+        //
+        //    override fun onProductRestored(purchaseInfo: DataWrappers.PurchaseInfo) {
+        //        Log.e("TAG", "onSubscriptionRestored: $purchaseInfo")
+        //        if (purchaseInfo.sku == "subscription_lifetime") {
+        //            isPremium = true
+        //        }
+        //    }
+        //
+        //    override fun onPurchaseFailed(purchaseInfo: DataWrappers.PurchaseInfo?, billingResponseCode: Int?) {}
+        //})
         init { requestConsentForm() }
     }
 
     private fun requestConsentForm() {
-        if (isNetworkAvailable()) {
+        if (!isPremium && isNetworkAvailable()) {
             consentManager = ConsentManager.getInstance(this)
             consentManager?.gatherConsent(this) { consentError ->
                 if (consentManager?.canRequestAds == true) {
@@ -58,9 +83,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun gotoDashboard() {
-        if (isStartFlowRepeat() || tinyDB?.getBoolean(IS_LANGUAGE_ENABLED, true) == true) {
+        if ((isStartFlowRepeat() && !isPremium) || tinyDB?.getBoolean(IS_LANGUAGE_ENABLED, true) == true) {
             go(AppLanguageActivity::class.java, finish = true)
-        } else if (tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true) {
+        } else if (tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true && !isPremium) {
             go(AppBoardingActivity::class.java, finish = true)
         } else {
             go(HomeActivity::class.java, finish = true)

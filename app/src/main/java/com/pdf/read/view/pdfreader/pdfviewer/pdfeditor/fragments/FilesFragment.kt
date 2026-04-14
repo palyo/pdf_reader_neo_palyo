@@ -3,6 +3,7 @@ package com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.fragments
 import android.content.*
 import android.net.*
 import android.os.*
+import android.util.*
 import android.view.animation.*
 import androidx.core.content.*
 import androidx.recyclerview.widget.*

@@ -10,10 +10,6 @@ class FragmentTabPager(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     var tabs: MutableList<String> = mutableListOf()
 
-    companion object {
-        var sharedNativeAd: NativeAd? = null
-    }
-
     fun addTabs(newTabTitles: MutableList<String>?) {
         if (newTabTitles != null) {
             tabs.clear()

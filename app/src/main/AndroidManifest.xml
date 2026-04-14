@@ -46,6 +46,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="UPSIDE_DOWN_CAKE">
         <activity
+            android:name=".activities.PremiumActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.tools.modify.SplitActivity"
             android:exported="false" />
         <activity
