@@ -34,12 +34,23 @@ class AppLanguageActivity : BaseActivity<ActivityAppLanguageBinding>(ActivityApp
             currentLanguage = language
             val fromHome = intent?.getBooleanExtra(IS_SETTINGS, false)
             if (fromHome == true) {
+                // User opened Language from the settings menu — return there directly,
+                // don't drag them through the first-run permission funnel again.
                 go(HomeActivity::class.java, finish = true)
+                return@setOnClickListener
+            }
+
+            tinyDB?.putBoolean(IS_LANGUAGE_ENABLED, false)
+
+            // First-run flow: Splash → Language → Permission → Onboarding → Dashboard.
+            // Gate on live OS permission state — if any of the after-call
+            // permissions is still missing (incl. when the language picker
+            // re-fires periodically via isStartFlowRepeat()), funnel the user
+            // through the permission screen again.
+            if (!hasAllAfterCallPermissions() && !isPremium) {
+                go(AfterCallPermissionActivity::class.java, finish = true)
             } else {
-                tinyDB?.putBoolean(IS_LANGUAGE_ENABLED, false)
-                if (isStartFlowRepeat() || tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true && !isPremium) {
-                    go(AppBoardingActivity::class.java, finish = true)
-                }
+                go(HomeActivity::class.java, finish = true)
             }
         }
     }

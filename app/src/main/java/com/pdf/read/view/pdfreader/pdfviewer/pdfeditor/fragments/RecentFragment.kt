@@ -14,6 +14,7 @@ import com.google.android.material.textview.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.adapter.*
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
@@ -30,6 +31,13 @@ class RecentFragment : BaseFragment<FragmentRecentBinding>(FragmentRecentBinding
     override fun FragmentRecentBinding.viewCreated() {
         setupAdapter()
         setupData()
+        // Inline native ad — HomeFragment is the single source of truth for
+        // the cached NativeAd; we observe the shared holder and forward each
+        // emission into the adapter so the ad slots populate as soon as a
+        // fill arrives. No extra ad-request is made from this fragment.
+        NativeAdHolder.adLiveData.observe(viewLifecycleOwner) { ad ->
+            ad?.let { commonAdapter?.updateNativeAd(it) }
+        }
     }
 
     private fun FragmentRecentBinding.setupData() {

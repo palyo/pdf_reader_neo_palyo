@@ -14,6 +14,7 @@ import com.google.android.material.textview.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.viewer.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.adapter.*
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.database.table.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
@@ -29,6 +30,13 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
     override fun FragmentFavoriteBinding.viewCreated() {
         setupAdapter()
         setupData()
+        // Inline native ad — HomeFragment loads and caches the NativeAd in
+        // NativeAdHolder; this fragment just observes and forwards new
+        // emissions to the adapter so the ad slots inside Favorites populate
+        // as soon as a fill arrives. No additional ad-request is made.
+        NativeAdHolder.adLiveData.observe(viewLifecycleOwner) { ad ->
+            ad?.let { commonAdapter?.updateNativeAd(it) }
+        }
     }
 
     private fun FragmentFavoriteBinding.setupData() {

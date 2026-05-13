@@ -4,6 +4,17 @@ const val CURRENT_TAB = "current_tab"
 const val IS_SETTINGS = "is_settings"
 const val IS_LANGUAGE_ENABLED = "is_language_enabled"
 const val IS_ONBOARDING_ENABLED = "is_onboarding_enabled"
+
+/**
+ * User-facing master switch for the after-call (Caller ID) screen.
+ *
+ * When `true` (default) the post-call screen launches after every call
+ * ends; when `false`, the receivers/services short-circuit via
+ * `AfterCallConfig.disabled`. Persisted in TinyDB so it survives process
+ * death; read at [com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.App.onCreate]
+ * and re-applied whenever the user flips the switch in Settings.
+ */
+const val ENABLE_POST_CALL_SCREEN = "enablePostCallScreen"
 const val DOC_FILE = "doc_file"
 const val PPT_FILE = "ppt_file"
 const val XLS_FILE = "xls_file"

@@ -5,6 +5,11 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+# 16 KB page size alignment for Android 15+ (and future ARM64 devices).
+# Forces the linker to align LOAD segments on 16 KB boundaries so the .so
+# can be loaded on 16 KB-page kernels. No-op on 4 KB devices.
+add_link_options("-Wl,-z,max-page-size=16384")
+
 set(TARGET smart_cropper)
 set(SRC_DIR src/main/cpp/)
 set(OPENCV_LIB_DIR opencv/lib/${ANDROID_ABI}/)

@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "/Volumes/ExternalDrive/Kotlin/PDFReaderNeo/smartcropper/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/coder/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Volumes/ExternalDrive/Kotlin/PDFReaderNeo/smartcropper/.cxx/RelWithDebInfo/4p6n6i6i/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/coder/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Volumes/ExternalDrive/Kotlin/PDFReaderNeo/smartcropper/.cxx/RelWithDebInfo/4p6n6i6i/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "smart_cropper::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "armeabi-v7a",
+      "artifactName": "smart_cropper",
+      "output": "/Volumes/ExternalDrive/Kotlin/PDFReaderNeo/smartcropper/build/intermediates/cxx/RelWithDebInfo/4p6n6i6i/obj/armeabi-v7a/libsmart_cropper.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/coder/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/coder/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

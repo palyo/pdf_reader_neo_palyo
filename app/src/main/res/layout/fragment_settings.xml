@@ -149,25 +149,74 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_share" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_caller_id"
-                style="@style/MaterialButtonTransparent"
+            <!--
+              Caller ID toggle (after-call screen master switch).
+              Whole row is clickable: tap anywhere on it to flip the switch
+              and persist the value into TinyDB under ENABLE_POST_CALL_SCREEN.
+            -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/row_caller_id"
                 android:layout_width="@dimen/_0sdp"
                 android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
+                android:background="@color/colorCardBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="@dimen/_12sdp"
                 android:paddingVertical="@dimen/_12sdp"
-                android:paddingStart="@dimen/_12sdp"
-                android:text="@string/menu_caller_id"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="gone"
-                app:backgroundTint="@color/colorCardBackground"
-                app:cornerRadius="@dimen/_0sdp"
-                app:icon="@drawable/ic_menu_caller_id"
-                app:iconPadding="@dimen/_12sdp"
-                app:iconSize="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_privacy" />
+                app:layout_constraintTop_toBottomOf="@+id/button_privacy">
+
+                <ImageView
+                    android:id="@+id/icon_caller_id"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_menu_caller_id"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorIcon"
+                    tools:ignore="ContentDescription" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_caller_id_title"
+                    android:layout_width="@dimen/_0sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:text="@string/menu_caller_id_title"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/switch_caller_id"
+                    app:layout_constraintStart_toEndOf="@+id/icon_caller_id"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_caller_id_desc"
+                    android:layout_width="@dimen/_0sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/menu_caller_id_desc"
+                    android:textColor="@color/colorTextOpacity"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_caller_id_title"
+                    app:layout_constraintStart_toStartOf="@+id/text_caller_id_title"
+                    app:layout_constraintTop_toBottomOf="@+id/text_caller_id_title" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_caller_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:thumbTint="@color/switch_caller_id_thumb"
+                    app:trackDecorationTint="@color/switch_caller_id_outline"
+                    app:trackTint="@color/switch_caller_id_track" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_manage_consent"
@@ -187,7 +236,7 @@
                 app:iconSize="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_caller_id" />
+                app:layout_constraintTop_toBottomOf="@+id/row_caller_id" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

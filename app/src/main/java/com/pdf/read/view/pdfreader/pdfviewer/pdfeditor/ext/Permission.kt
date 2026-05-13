@@ -15,3 +15,32 @@ fun Activity.hasPermissions(permissions: Array<String>): Boolean = permissions.a
 fun Activity.hasOverlayPermission(): Boolean {
     return Settings.canDrawOverlays(this)
 }
+
+/**
+ * The trio of permissions the after-call screen needs to function:
+ *   - `READ_PHONE_STATE` so [coder.apps.aftercall.receivers.PhoneStateReceiver]
+ *     can detect call-ended transitions.
+ *   - `SYSTEM_ALERT_WINDOW` so the post-call screen can be launched from the
+ *     background on Android 10+.
+ *   - `POST_NOTIFICATIONS` (Android 13+) for the tap-to-open fallback when the
+ *     overlay route is denied.
+ *
+ * Used by the launch sequence (Splash → Language → Permission → Onboarding →
+ * Dashboard) to decide whether the permission screen still needs to be shown.
+ * Reflects the *current* OS permission state — there's deliberately no "seen"
+ * flag, so re-launching with a missing permission re-shows the funnel.
+ */
+fun android.content.Context.hasAllAfterCallPermissions(): Boolean {
+    val phoneOk = ActivityCompat.checkSelfPermission(
+        this, Manifest.permission.READ_PHONE_STATE
+    ) == PackageManager.PERMISSION_GRANTED
+    val overlayOk = Settings.canDrawOverlays(this)
+    val notifyOk = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        ActivityCompat.checkSelfPermission(
+            this, Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+    } else {
+        true
+    }
+    return phoneOk && overlayOk && notifyOk
+}

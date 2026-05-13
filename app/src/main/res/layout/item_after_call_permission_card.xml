@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/permCardRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_after_call_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="74dp"
+    android:padding="14dp"
+    tools:ignore="HardcodedText">
+
+    <ImageView
+        android:id="@+id/imagePermBg"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_after_call_icon_circle"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imagePermIcon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@id/imagePermBg"
+        app:layout_constraintEnd_toEndOf="@id/imagePermBg"
+        app:layout_constraintStart_toStartOf="@id/imagePermBg"
+        app:layout_constraintTop_toTopOf="@id/imagePermBg"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_after_call_phone" />
+
+    <TextView
+        android:id="@+id/textPermLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/colorText"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/textPermStatus"
+        app:layout_constraintStart_toEndOf="@id/imagePermBg"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Phone state" />
+
+    <!--
+      Description sits below the label and pins to the parent bottom. When the
+      text wraps to 2–3 lines the card grows downward instead of overflowing
+      into the label (which is what caused the earlier overlap on the
+      Notifications card).
+    -->
+    <TextView
+        android:id="@+id/textPermDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/colorTextOpacity"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/textPermLabel"
+        app:layout_constraintStart_toStartOf="@id/textPermLabel"
+        app:layout_constraintTop_toBottomOf="@id/textPermLabel"
+        tools:text="Offer a tap-to-open notification if the screen can't appear automatically." />
+
+    <!--
+      Status pill stays vertically centred to the label (not the icon), so it
+      always reads as "this label is required/granted" regardless of how tall
+      the card becomes.
+
+      `includeFontPadding=false` removes the implicit ~3dp of font-metric
+      leading above/below the glyph that the platform adds by default — that
+      slack was making the top of the "Required" text look clipped by the
+      rounded pill border. Vertical padding bumped 4→6 dp for a touch more
+      breathing room inside the pill.
+    -->
+    <TextView
+        android:id="@+id/textPermStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_after_call_pill_required"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="6dp"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textPermLabel"
+        tools:text="Required"
+        tools:textColor="@color/colorAccent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

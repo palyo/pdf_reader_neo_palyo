@@ -1,5 +1,9 @@
 # Created by https://www.gitignore.io/api/android,intellij+iml,gradle
 
+### Secrets ###
+# Firebase App Distribution service-account credential (do NOT commit).
+appdistribution/service-account.json
+
 ### Android ###
 # Built application files
 *.apk

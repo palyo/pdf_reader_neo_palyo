@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Outline tint for the Caller-ID master switch.
+  Transparent when ON (the filled accent track owns the look); a soft
+  outline when OFF so the switch is visible against the card.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/transparent" android:state_checked="true" />
+    <item android:color="@color/colorTextOpacity" />
+</selector>

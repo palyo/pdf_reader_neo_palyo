@@ -1,5 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+      Theme applied to com.google.android.gms.ads.AdActivity (interstitial,
+      rewarded, rewarded-interstitial, app-open host).
+
+      Important: the parent is `@android:style/Theme.Translucent.NoTitleBar`,
+      NOT plain `Theme.Translucent`. Without the `.NoTitleBar` suffix, the
+      platform's classic Holo title bar renders at the top of AdActivity and
+      shows the host app's label ("PDF Viewer - Scan & Convert"). That's the
+      grey strip we kept seeing in screenshots — it has nothing to do with
+      the system status bar; it's an in-app title bar drawn by the window.
+
+      `windowOptOutEdgeToEdgeEnforcement` covers Android 15. On Android 16 the
+      flag is ignored, so we also push a runtime WindowInsetsListener onto
+      AdActivity from `App.onActivityCreated` (see App.kt) that pads the
+      activity's content view below the status / nav bar insets.
+
+      `windowBackground=@color/colorBlack` makes the area around the ad
+      creative (status-bar strip, any safe-area margins on tablets) render
+      solid black instead of the platform default cream — so the bar above
+      the ad looks unified rather than a thin transparent sliver.
+    -->
+    <style name="Theme.AdActivity.OptOutEdgeToEdge" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:ignore="NewApi">true</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
+        <item name="android:statusBarColor">@color/colorBlack</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
     <style name="Theme.PdfReaderNeo" parent="Theme.Space">
         <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:ignore="NewApi">true</item>
         <item name="android:actionOverflowButtonStyle">@style/Theme.PdfReaderNeo.ActionButtonOverflow</item>
@@ -29,10 +57,8 @@
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="Theme.PdfReaderNeo.Indicator" parent="Theme.Space.Indicator">
+    <style name="Theme.PdfReaderNeo.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/colorTransparent</item>
-        <item name="android:width">@dimen/_56sdp</item>
-        <item name="android:height">@dimen/_42sdp</item>
         <item name="shapeAppearance">@style/Theme.Space.Indicator.Shape</item>
     </style>
 

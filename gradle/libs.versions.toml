@@ -37,14 +37,18 @@ poi = "4.1.2"
 firebase = "32.2.0"
 gms-googleServices = "4.3.15"
 firebase-crashlytics-gradle = "2.9.5"
+firebase-appdistribution = "5.1.1"
 
 pdfboxAndroid = "2.0.27.0"
 pdfiumAndroid = "1.9.0"
 itextg = "5.5.10"
-cameraCamera2 = "1.3.3"
+cameraCamera2 = "1.4.2"
 guava = "32.0.1-jre"
 gpuimage = "2.0.4"
-tensorflowLite = "1.13.1"
+# LiteRT is the successor to org.tensorflow:tensorflow-lite. Ships 16 KB-aligned
+# native libs and preserves the legacy `org.tensorflow.lite.Interpreter` API,
+# so it's a drop-in replacement for our smartcropper module.
+litert = "2.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,7 +61,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime" }
-tensorflow-lite = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLite" }
+tensorflow-lite = { module = "com.google.ai.edge.litert:litert", version.ref = "litert" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
 androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraCamera2" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCamera2" }
@@ -127,6 +131,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 firebase-crashlitycs = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-gradle" }
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appdistribution" }
 gms-googleServices = { id = "com.google.gms.google-services", version.ref = "gms-googleServices" }
 
 [bundles]

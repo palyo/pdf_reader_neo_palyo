@@ -1,0 +1,1 @@
+/Volumes/ExternalDrive/Kotlin/PDFReaderNeo/smartcropper/build/intermediates/cxx/RelWithDebInfo/4p6n6i6i/obj/arm64-v8a

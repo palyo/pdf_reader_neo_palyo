@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="postCallColorPrimary">#FFFFFF</color>
+    <color name="postCallColorPrimaryDark">#FFFFFF</color>
+    <color name="postCallColorAccent">#000000</color>
+    <color name="postCallColorAccentTool">#FFFFFF</color>
+    <color name="postCallColorCard">#E2E2E2</color>
+    <color name="postCallColorCardBackground">#F5F5F5</color>
+    <color name="postCallColorText">#252525</color>
+    <color name="postCallColorTextOpacity">#80252525</color>
+    <color name="postCallColorTextOpacity24">#3D252525</color>
+    <color name="postCallColorWhite">#FFFFFF</color>
+    <color name="postCallColorLightCard">#EFEFEF</color>
+
+    <!-- Aliases that the bundled layouts reference. Host apps that
+         already define these names will override silently. -->
+    <color name="colorPrimary">@color/postCallColorPrimary</color>
+    <color name="colorPrimaryDark">@color/postCallColorPrimaryDark</color>
+    <color name="colorAccent">@color/postCallColorAccent</color>
+    <color name="colorAccentTool">@color/postCallColorAccentTool</color>
+    <color name="colorCard">@color/postCallColorCard</color>
+    <color name="colorCardBackground">@color/postCallColorCardBackground</color>
+    <color name="colorText">@color/postCallColorText</color>
+    <color name="colorTextOpacity">@color/postCallColorTextOpacity</color>
+    <color name="colorTextOpacity24">@color/postCallColorTextOpacity24</color>
+    <color name="colorWhite">@color/postCallColorWhite</color>
+    <color name="colorLightCard">@color/postCallColorLightCard</color>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="post_call_app_name" translatable="false">After Call</string>
+    <string name="after_call_label_voice_recording">Voice Recording</string>
+
+    <string name="label_duration">Duration</string>
+    <string name="private_number">Private Number</string>
+    <string name="label_call_end">Call End</string>
+    <string name="label_missed_call">Missed call</string>
+    <string name="label_incoming_call">Incoming call</string>
+    <string name="label_outgoing_call">Outgoing call</string>
+    <string name="label_unknown">Unknown</string>
+    <string name="label_new_event">New Event</string>
+    <string name="label_share_text">your_text</string>
+    <string name="channel_post_call_screen_description">Notifications are info related.</string>
+    <string name="channel_post_call_screen_name">PostCallScreen</string>
+    <string name="no_app_found">No application found!</string>
+    <string name="notification_post_call_private_number">Private number</string>
+    <string name="notification_post_call_title">This Call</string>
+    <string name="placeholder_email_subject">your_subject</string>
+    <string name="placeholder_email_uri">mailto:your_email</string>
+    <string name="quick_reply_1">Can’t talk right now.</string>
+    <string name="quick_reply_2">I’ll Call you later.</string>
+    <string name="quick_reply_3">I’m on my way.</string>
+    <string name="quick_reply_4">Can’t talk now. Call me later.</string>
+    <string name="toast_no_calendar_app_found">No calendar app found</string>
+</resources>

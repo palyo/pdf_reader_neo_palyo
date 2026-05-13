@@ -9,6 +9,16 @@ interface RecentDao {
     @Query("SELECT * FROM recent ORDER BY timestamp DESC")
     fun fetchAll(): LiveData<MutableList<Recent>>
 
+    /**
+     * Synchronous top-N query used by the after-call screen to populate
+     * the default tool grid with the user's most recent PDFs. The list
+     * needs to be available before the fragment's view is created, so a
+     * blocking variant is simpler than wiring LiveData through the
+     * AfterCall module's config object.
+     */
+    @Query("SELECT * FROM recent ORDER BY timestamp DESC LIMIT :limit")
+    fun fetchRecent(limit: Int): List<Recent>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recent: Recent)
 

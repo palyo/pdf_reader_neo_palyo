@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Track tint for the Caller-ID master switch.
+  Accent-red (#D84040) when ON so it pops against the cream-coloured
+  card; a darker grey when OFF, distinct from the card fill itself.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/colorAccent" android:state_checked="true" />
+    <item android:color="@color/colorTextOpacity24" />
+</selector>

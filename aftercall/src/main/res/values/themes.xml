@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AfterCall" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="Theme.SlideAnimWindow" parent="Theme.AfterCall">
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
+    </style>
+
+    <style name="SlideAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/post_slide_from_bottom</item>
+        <item name="android:activityOpenExitAnimation">@anim/post_none</item>
+        <item name="android:activityCloseEnterAnimation">@anim/post_none</item>
+        <item name="android:activityCloseExitAnimation">@anim/post_slide_to_bottom</item>
+    </style>
+
+    <style name="ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium" />
+</resources>

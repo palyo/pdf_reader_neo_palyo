@@ -31,3 +31,4 @@ dependencyResolutionManagement {
 rootProject.name = "PdfReader.Neo"
 include(":app")
 include(":smartcropper")
+include(":aftercall")

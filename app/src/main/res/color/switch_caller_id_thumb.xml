@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Thumb tint for the Caller-ID master switch.
+  Pure white on the accent-red track when ON; grey when OFF, matching
+  the card-background hierarchy used elsewhere in the app.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/white" android:state_checked="true" />
+    <item android:color="@color/colorIconOpacity" />
+</selector>

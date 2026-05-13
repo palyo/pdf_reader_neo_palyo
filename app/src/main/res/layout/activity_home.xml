@@ -74,6 +74,19 @@
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--
+      Vertical stack (top → bottom):
+        [top bar]
+        [fragment container]
+        [view_separator]            ← thin hairline above the bottom nav
+        [bottom_navigation_view]    ← always the last pixel of the screen
+
+      The bottom collapsible banner used to live here; it was replaced with
+      inline native ads injected into the Recents/Home/Favorites lists by
+      CommonAdapter (every 8 organic items, never within the first 3).
+      Native ad eCPM beats the 65dp banner and the lists no longer have a
+      permanent chunk of screen real estate eaten by chrome.
+    -->
     <com.google.android.material.circularreveal.CircularRevealFrameLayout
         android:id="@+id/container_fragment"
         android:layout_width="@dimen/_0sdp"
@@ -105,8 +118,8 @@
         app:itemTextAppearanceActive="@style/Theme.PdfReaderNeo.BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/Theme.PdfReaderNeo.BottomNavigationView.InActive"
         app:itemTextColor="@color/ic_nav_item_tint"
-        app:labelVisibilityMode="auto"
-        app:layout_constraintBottom_toTopOf="@+id/view_separator2"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
@@ -120,25 +133,7 @@
         android:text="Scan"
         app:icon="@drawable/ic_tool_scanner"
         app:iconPadding="@dimen/_8sdp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+        app:layout_constraintBottom_toTopOf="@id/view_separator"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:id="@+id/view_separator2"
-        android:layout_width="@dimen/_0sdp"
-        android:layout_height="2dp"
-        android:background="@color/colorCardBackground"
-        app:layout_constraintBottom_toTopOf="@+id/ad_banner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <coder.apps.space.library.widgets.AdsView
-        android:id="@+id/ad_banner"
-        android:layout_width="@dimen/_0sdp"
-        android:layout_height="@dimen/native_65dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:shimmer_preview_layout="@layout/ad_unified_banner_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

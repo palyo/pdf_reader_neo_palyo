@@ -30,7 +30,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             documentViewModel?.loadPreload()
             appOpenCount += 1
         }
-        viewCollapsibleBanner(adBanner)
+        // No more bottom banner — inline native ads inside each list provide
+        // the dashboard's ad surface now (see CommonAdapter + HomeFragment).
         loadRewardAd()
     }
 

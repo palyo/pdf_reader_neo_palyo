@@ -28,7 +28,20 @@ class CommonAdapter(
 
         private const val VIEW_TYPE_FILE = 0
         private const val VIEW_TYPE_AD = 1
-        private const val AD_INDEX = 2
+
+        /**
+         * AdMob policy guard rails for the single inline native ad slot:
+         *
+         *  - [MIN_FILES_FOR_ADS] — Skip the ad entirely on near-empty lists
+         *    (≤ 3 items); without enough organic content around it, the
+         *    ad would dominate the visible area.
+         *  - [AD_POSITION] — One ad, inserted after this many organic
+         *    items. Keeps the top of the list ad-free so the screen above
+         *    the fold is content, satisfying AdMob's "primarily ads" check.
+         */
+        private const val MIN_FILES_FOR_ADS = 4
+        private const val AD_POSITION = 3
+        private const val AD_PLACEHOLDER = "AD_PLACEHOLDER"
     }
 
     private var nativeAd: NativeAd? = null
@@ -98,24 +111,25 @@ class CommonAdapter(
         }
     }
 
+    /**
+     * Rebuilds [items] from the supplied file list and inserts the single
+     * inline native ad after the [AD_POSITION]-th organic item.
+     *
+     * Layout when ads are enabled and the list is long enough:
+     *   file[0] · file[1] · file[2] · **AD** · file[3] · file[4] · …
+     *
+     * Premium users, sub-[MIN_FILES_FOR_ADS] lists, and `null` input skip
+     * ad insertion entirely.
+     */
     fun addAll(files: MutableList<File>?) {
         items.clear()
-        files?.let {
-            val showAds = !context.isPremium
-            val adInterval = 10
-            var i = 0
-            var actualPosition = 0
-
-            while (i < it.size) {
-                // Insert ad at position 1 (2nd item), then every 10th item after that
-                if (showAds && (actualPosition == 1 || (actualPosition > 1 && (actualPosition - 1) % adInterval == 0))) {
-                    items.add("AD_PLACEHOLDER")
-                    actualPosition++
+        files?.let { input ->
+            val showAds = !context.isPremium && input.size >= MIN_FILES_FOR_ADS
+            input.forEachIndexed { index, file ->
+                if (showAds && index == AD_POSITION) {
+                    items.add(AD_PLACEHOLDER)
                 }
-
-                items.add(it[i])
-                i++
-                actualPosition++
+                items.add(file)
             }
         }
         notifyDataSetChanged()

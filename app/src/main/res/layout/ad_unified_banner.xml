@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Outer height changed from the fixed `native_65dp` to `wrap_content` with a
+  `minHeight` floor: the 3-line text stack (headline + Ad badge row + body)
+  was being clipped at the bottom of the 65 dp container after the icon
+  margins grew to `8sdp` for icon-column alignment. Now the row grows
+  vertically when the text needs it, and stays at 65 dp on shorter content.
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/native_65dp"
-    android:layout_gravity="center">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:minHeight="@dimen/native_65dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/native_card"
@@ -20,27 +28,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!--
+              Outer margins and icon dimensions deliberately match
+              `layout_row_item_directory.xml` (file_card = 42sdp, 8sdp start /
+              vertical margins; text_title starts 6sdp after the card). Without
+              this, the ad's icon was 50dp at 5dp left margin while file PDF
+              icons were 42sdp at 8sdp — making the icon column look jagged
+              wherever the ad fell mid-list.
+            -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+                <!--
+                  `fitCenter` preserves the icon's aspect ratio and never
+                  crops — important because AdMob delivers asset icons in
+                  arbitrary aspect ratios and `centerCrop` was chopping the
+                  edges off non-square logos (e.g. the Google Ads test icon).
+                -->
                 <ImageView
                     android:id="@+id/ad_app_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:adjustViewBounds="true" />
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="@dimen/_6sdp"
                     android:orientation="horizontal">
 
                     <RelativeLayout

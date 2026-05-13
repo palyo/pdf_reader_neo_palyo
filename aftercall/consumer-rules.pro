@@ -1,0 +1,1 @@
+-keep class coder.apps.aftercall.** { *; }

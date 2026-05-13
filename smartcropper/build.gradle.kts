@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "me.pqpo.smartcropperlib"
     compileSdk = 34
+    ndkVersion = "27.2.12479018"
 
     defaultConfig {
         minSdk = 26
@@ -19,7 +20,13 @@ android {
                 cppFlags.add("-frtti")
                 cppFlags.add("-fexceptions")
                 abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
-                arguments.addAll(listOf("-DANDROID_TOOLCHAIN=clang", "-DANDROID_STL=c++_static"))
+                arguments.addAll(
+                    listOf(
+                        "-DANDROID_TOOLCHAIN=clang",
+                        "-DANDROID_STL=c++_static",
+                        "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                    )
+                )
             }
         }
     }
@@ -49,6 +56,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        // LiteRT 2.1.4 was compiled with Kotlin 2.3.0 metadata; this project is on
+        // Kotlin 2.1.10. The bytecode is forward-compatible — only the metadata
+        // version differs — so skip the strict check on third-party class files.
+        freeCompilerArgs += "-Xskip-metadata-version-check"
     }
 }
 

@@ -82,13 +82,35 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
+    /**
+     * Launch sequence: Splash → Language → Permission → Dashboard.
+     *
+     * The previous chain included an Onboarding step between Permission and
+     * Dashboard. [AppBoardingActivity] still exists in the codebase and the
+     * `IS_ONBOARDING_ENABLED` TinyDB flag is still defined — they're just no
+     * longer wired into the cold-start chain. If you want to surface the
+     * onboarding deck from Settings or a "What's new" banner later, you can
+     * launch [AppBoardingActivity] directly without re-introducing it here.
+     *
+     * Language uses its "seen" flag in TinyDB (one-shot). The Permission step
+     * is gated on the *live* OS permission state via
+     * [hasAllAfterCallPermissions], so whenever any of the three after-call
+     * permissions is missing (e.g. user revoked from Settings or skipped
+     * them with "Maybe later"), the screen reappears every cold start. As
+     * soon as all three are granted, the funnel is silently skipped.
+     *
+     * `isStartFlowRepeat()` keeps the existing "re-prompt language picker
+     * periodically" behaviour.
+     */
     private fun gotoDashboard() {
-        if ((isStartFlowRepeat() && !isPremium) || tinyDB?.getBoolean(IS_LANGUAGE_ENABLED, true) == true) {
-            go(AppLanguageActivity::class.java, finish = true)
-        } else if (tinyDB?.getBoolean(IS_ONBOARDING_ENABLED, true) == true && !isPremium) {
-            go(AppBoardingActivity::class.java, finish = true)
-        } else {
-            go(HomeActivity::class.java, finish = true)
+        val showLanguage = (isStartFlowRepeat() && !isPremium) ||
+            tinyDB?.getBoolean(IS_LANGUAGE_ENABLED, true) == true
+        val showPermission = !hasAllAfterCallPermissions() && !isPremium
+
+        when {
+            showLanguage -> go(AppLanguageActivity::class.java, finish = true)
+            showPermission -> go(AfterCallPermissionActivity::class.java, finish = true)
+            else -> go(HomeActivity::class.java, finish = true)
         }
     }
 

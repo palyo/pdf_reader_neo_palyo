@@ -164,4 +164,23 @@
     <string name="message_invalid_input">Invalid input</string>
     <string name="message_invalid_range_input">Invalid range input</string>
     <string name="message_invalid_page_number">Invalid page number</string>
+
+    <!-- After-call settings -->
+    <string name="menu_caller_id_title">Caller ID</string>
+    <string name="menu_caller_id_desc">Show after call details and caller ID screen</string>
+
+    <!-- After-call permissions screen -->
+    <string name="after_call_perm_title">After-call screen</string>
+    <string name="after_call_perm_subtitle">Open your recent PDFs and PDF tools the moment a call ends. Grant the permissions below to enable it.</string>
+    <string name="after_call_perm_phone_label">Phone state</string>
+    <string name="after_call_perm_phone_desc">Detect when a call ends so we can show the after-call screen.</string>
+    <string name="after_call_perm_overlay_label">Display over other apps</string>
+    <string name="after_call_perm_overlay_desc">Show the after-call screen on top of your dialer.</string>
+    <string name="after_call_perm_notify_label">Notifications</string>
+    <string name="after_call_perm_notify_desc">Offer a tap-to-open notification if the screen can\'t appear automatically.</string>
+    <string name="after_call_perm_status_granted">Granted</string>
+    <string name="after_call_perm_status_required">Required</string>
+    <string name="after_call_perm_continue">Allow &amp; Continue</string>
+    <string name="after_call_perm_skip">Maybe later</string>
+    <string name="after_call_perm_rationale">We never read your call history, contacts, or call audio. The screen only appears after a call ends and is dismissed by swiping it away.</string>
 </resources>

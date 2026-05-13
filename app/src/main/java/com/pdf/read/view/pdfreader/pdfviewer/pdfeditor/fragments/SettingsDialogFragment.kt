@@ -10,6 +10,7 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext.*
+import coder.apps.aftercall.AfterCallConfig
 
 class SettingsDialogFragment : BaseDialog<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
     var tinyDB: TinyDB? = null
@@ -57,6 +58,26 @@ class SettingsDialogFragment : BaseDialog<FragmentSettingsBinding>(FragmentSetti
             buttonPrivacy.setOnClickListener {
                 activity?.launchUrl("https://sites.google.com/view/filemanager-by-aani-brothers/home")
             }
+
+            // Caller-ID / after-call master switch.
+            // - Initial state: TinyDB(ENABLE_POST_CALL_SCREEN, default=true)
+            // - Whole row is clickable → flips the switch (which then fires the
+            //   change listener). The switch itself has clickable=false so the
+            //   row click doesn't fight the thumb's own click.
+            // - On change: persist + mirror into AfterCallConfig.disabled so the
+            //   receivers/services see the new value immediately, without
+            //   waiting for the next process restart.
+            val enabled = tinyDB?.getBoolean(ENABLE_POST_CALL_SCREEN, true) ?: true
+            switchCallerId.isChecked = enabled
+            AfterCallConfig.disabled = !enabled
+            switchCallerId.setOnCheckedChangeListener { _, isChecked ->
+                tinyDB?.putBoolean(ENABLE_POST_CALL_SCREEN, isChecked)
+                AfterCallConfig.disabled = !isChecked
+            }
+            rowCallerId.setOnClickListener {
+                switchCallerId.isChecked = !switchCallerId.isChecked
+            }
+
 //            val consentManager = GoogleMobileAdsConsentManager.getInstance(requireActivity())
 //            consentManager.isPrivacyOptionsRequired.let {
 //                buttonManageConsent.beVisibleIf(it)

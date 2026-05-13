@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Default tab of the post-call screen.
+
+  Layout history: the big primary-action card ("tabRecording" with the host
+  app icon and name) used to sit above the tool grid here. Combined with the
+  bottom native ad in the activity, the tool grid was pushed off-screen with
+  no reliable way to scroll back to it on smaller devices. We removed the
+  primary tile entirely so the tool grid sits at the top of the scrollable
+  area, leaving plenty of room for the native ad above the tabs in the
+  activity. When the ad is tall, the NestedScrollView keeps the tools
+  reachable by vertical scroll.
+-->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:paddingBottom="@dimen/_12sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerTools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/_6sdp"
+            tools:itemCount="6"
+            tools:listitem="@layout/post_call_item_tool" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -49,6 +49,10 @@
             android:name=".activities.PremiumActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.AfterCallPermissionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PdfReaderNeo" />
+        <activity
             android:name=".activities.tools.modify.SplitActivity"
             android:exported="false" />
         <activity
