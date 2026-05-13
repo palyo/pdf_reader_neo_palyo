@@ -67,8 +67,8 @@ android {
         applicationId = "com.pdf.read.view.pdfreader.pdfviewer.pdfeditor"
         minSdk = 26
         targetSdk = 35
-        versionCode = 10
-        versionName = "10.0"
+        versionCode = 11
+        versionName = "11.0"
 
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
@@ -212,7 +212,10 @@ dependencies {
 
     implementation(libs.bundles.glide)
     ksp(libs.glide.ksp)
-    implementation(libs.bundles.retrofit)
+    // libs.bundles.retrofit removed — the only consumer was DroidSpace.kt's
+    // remote ad_manager.json fetch, which is now inlined as compile-time
+    // constants. OkHttp is still pulled transitively via glide-okhttp3-integration
+    // for image loading; that's the only HTTP dependency left in the project.
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.coroutines)
     implementation(libs.bundles.navigation)

@@ -193,6 +193,7 @@ class App : MultiDexApplication(), Application.ActivityLifecycleCallbacks {
             }
         )
         AfterCallConfig.setTools(defaultFeatureTools())
+        AfterCallConfig.setAdUnits("ca-app-pub-4852962457779682/4214973568","ca-app-pub-4852962457779682/3242848841","ca-app-pub-4852962457779682/5610376326")
 
         // Honour the user's Caller-ID master switch from Settings. When false,
         // the receivers/services short-circuit and the post-call screen never

@@ -11,6 +11,7 @@ import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.activities.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.databinding.*
 import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.ext.*
 import coder.apps.aftercall.AfterCallConfig
+import com.pdf.read.view.pdfreader.pdfviewer.pdfeditor.admodule.getPolicyLink
 
 class SettingsDialogFragment : BaseDialog<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
     var tinyDB: TinyDB? = null
@@ -56,7 +57,7 @@ class SettingsDialogFragment : BaseDialog<FragmentSettingsBinding>(FragmentSetti
             }
 
             buttonPrivacy.setOnClickListener {
-                activity?.launchUrl("https://sites.google.com/view/filemanager-by-aani-brothers/home")
+                activity?.launchUrl(getPolicyLink())
             }
 
             // Caller-ID / after-call master switch.
